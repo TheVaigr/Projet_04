@@ -1,6 +1,6 @@
 class Hero
 
-  def initialize(pseudo, arme, couleur x, y)
+  def initialize(pseudo, arme, couleur, x, y)
     @pseudo = pseudo
     @arme = arme
     @vie = 100
@@ -13,14 +13,14 @@ class Hero
     @velocityX = 0.0
 
     @images = []
-    @images.push(Gosu::Image.new("res/hero/face.png"))
-    @images.push(Gosu::Image.new("res/hero/gauche.png"))
-    @images.push(Gosu::Image.new("res/hero/droite.png"))
+    @images.push(Gosu::Image.new("../resources/missil_1.png"))
+    #@images.push(Gosu::Image.new("res/hero/gauche.png"))
+    #@images.push(Gosu::Image.new("res/hero/droite.png"))
     @image = @images[0]
   end
 
   def draw
-    @image.draw(@x, @y, ZOrder::Hero)
+    @image.draw(@x, @y, 0)
   end
 
   def go_left
@@ -47,7 +47,7 @@ class Hero
   end
 
   def prendreDegats(degats)
-    @vie -= degats
+    @vie = @vie - degats
   end
 
   def estMort

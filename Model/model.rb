@@ -1,6 +1,6 @@
 require 'gosu'
 
-require_relative '../*'
+require_relative '../Classes/hero'
 
 class Model
 

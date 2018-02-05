@@ -1,12 +1,14 @@
-require_relative '../*'
+require_relative '../Model/model'
+require_relative '../Classes/hero'
+require_relative '../Classes/Armes/canon'
 
 class MainIHM < Gosu::Window
 
-  def initialize(width, height, niveauDifficulte, pseudo)
+  def initialize(width, height, pseudo, couleur)
     super
     self.caption = "Milky Way Light"
-    @model = new Model(width, height, niveauDifficulte, pseudo)
-    @background_image = Gosu::Image.new("res/picture.jpg")
+    @background_image = Gosu::Image.new("../resources/missil_1.png")
+    @hero = Hero.new(pseudo, arme = Canon.new(), couleur, width/2, height/2)
     @song = Gosu::Song.new("res/music.mp3")
     @song.volume = 0.0
     @song.play(true)
@@ -27,12 +29,12 @@ class MainIHM < Gosu::Window
     close if Gosu::button_down?(Gosu::KbEscape)
   end
 
-  def draw('jj')
+  def draw
     @background_image.draw(0, 0, ZOrder::Background)
     @hero.draw
-    for ennemis
-      @ennemi.draw
-    end
+    #for ennemis
+     # @ennemi.draw
+    #end
   end
 
 end

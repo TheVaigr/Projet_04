@@ -4,8 +4,8 @@ require_relative '../IHM/main_ihm'
 
 WindowWidth = 1024
 WindowHeight = 576
-niveauDifficulte = 1
-pseudo = "bla"
+Couleur = 1
+Pseudo = "bla"
 
-Window = MainIHM.new(WindowWidth, WindowHeight,niveauDifficulte, pseudo)
+Window = MainIHM.new(WindowWidth, WindowHeight, Pseudo, Couleur)
 Window.show

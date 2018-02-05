@@ -42,7 +42,7 @@ class Hero
 
   def move
     @x += @velocityX
-    @x %= 1024
+    @x %= 1920
     @velocityX *= 0.1
   end
 

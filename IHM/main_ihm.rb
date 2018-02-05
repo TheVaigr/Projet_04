@@ -29,14 +29,18 @@ class MainIHM < Gosu::Window
 
 
     close if Gosu::button_down?(Gosu::KbEscape)
+
   end
 
   def draw
     @background_image.draw(0, 0, ZOrder::Background)
     @model.hero.draw
-    #for ennemis
-     # @ennemi.draw
-    #end
+
+    for i in 0..(@model.ennemis.size-1)
+      @model.ennemis[i].seDeplacer(@model.vitesseAutoScroll,@model.niveauDifficulte)
+      @model.ennemis[i].draw
+    end
+
   end
 
 end

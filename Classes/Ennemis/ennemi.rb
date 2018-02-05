@@ -1,11 +1,11 @@
 class Ennemi
 
-  def initialize(image, degatCollision, degat, ptsVie, vitesseDeplacement, vitesseTir, cadenceTir, x, y)
+  def initialize(image, degatCollision, degatTir, ptsVie, vitesseDeplacement, vitesseTir, cadenceTir, x, y)
     @x = x
     @y = y
 
     @degatCollision = degatCollision
-    @degatTir = degat
+    @degatTir = degatTir
     @ptsVie = ptsVie
     @vitesseDeplacement = vitesseDeplacement
     @vitesseTir = vitesseTir

@@ -40,12 +40,21 @@ class Hero
     @image = @images[2]
   end
 
-
-
   def move
     @x += @velocityX
     @x %= 1024
     @velocityX *= 0.1
+  end
+
+  def prendreDegats(degats)
+    @vie -= degats
+  end
+
+  def estMort
+    if @vie < 1
+      return true
+    end
+    return false
   end
 
 end

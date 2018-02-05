@@ -1,3 +1,5 @@
+require_relative '../*'
+
 class MainIHM < Gosu::Window
 
   def initialize(width, height, niveauDifficulte, pseudo)
@@ -11,19 +13,21 @@ class MainIHM < Gosu::Window
   end
 
   def update
+    # maj du héro
     if (!Gosu::button_down?(Gosu::KbRight)) && (!Gosu::button_down?(Gosu::KbLeft))
-      @hero.go_front
+      @model.hero.go_front
     elsif Gosu::button_down?(Gosu::KbRight)
-      @hero.go_right
+      @model.hero.go_right
     elsif Gosu::button_down?(Gosu::KbLeft)
-      @hero.go_left
+      @model.hero.go_left
     end
+    @model.hero.move
 
-    @hero.move
+
     close if Gosu::button_down?(Gosu::KbEscape)
   end
 
-  def draw
+  def draw('jj')
     @background_image.draw(0, 0, ZOrder::Background)
     @hero.draw
     for ennemis

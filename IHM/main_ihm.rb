@@ -9,9 +9,9 @@ class MainIHM < Gosu::Window
     self.caption = "Milky Way Light"
     @background_image = Gosu::Image.new("../resources/missil_1.png")
     @hero = Hero.new(pseudo, arme = Canon.new(), couleur, width/2, height/2)
-    @song = Gosu::Song.new("res/music.mp3")
-    @song.volume = 0.0
-    @song.play(true)
+    #@song = Gosu::Song.new("res/music.mp3")
+    #@song.volume = 0.0
+    #@song.play(true)
   end
 
   def update

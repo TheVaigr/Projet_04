@@ -20,7 +20,7 @@ class Hero
   end
 
   def draw
-    @image.draw(@x, @y, 0)
+    @image.draw(@x, @y, ZOrder::Hero)
   end
 
   def go_left

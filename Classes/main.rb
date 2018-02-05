@@ -2,8 +2,8 @@ require 'gosu'
 
 require_relative '../IHM/main_ihm'
 
-WindowWidth = 1024
-WindowHeight = 576
+WindowWidth = 1900
+WindowHeight = 1000
 Couleur = 1
 Pseudo = "bla"
 

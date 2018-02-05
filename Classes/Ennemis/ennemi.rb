@@ -15,7 +15,11 @@ class Ennemi
   end
 
   def draw
-    @image.draw(@x, @y, ZOrder::Hero)
+    @image.draw(@x, @y, ZOrder::Ennemis)
+  end
+
+  def seDeplacer(autoScroll)
+
   end
 
 end

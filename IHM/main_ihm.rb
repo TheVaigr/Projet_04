@@ -1,13 +1,14 @@
 require_relative '../Model/model'
 require_relative '../Classes/hero'
 require_relative '../Classes/Armes/canon'
+require_relative '../Classes/z_order'
 
 class MainIHM < Gosu::Window
 
   def initialize(width, height, pseudo, couleur)
-    super
+    super width, height
     self.caption = "Milky Way Light"
-    @background_image = Gosu::Image.new("../resources/missil_1.png")
+    @background_image = Gosu::Image.new("../resources/ecrant_acceuil.png")
     @model = Model.new(1, pseudo, couleur, width, height)
 
     #@song = Gosu::Song.new("res/music.mp3")
@@ -31,7 +32,7 @@ class MainIHM < Gosu::Window
   end
 
   def draw
-    @background_image.draw(0, 0, 1)
+    @background_image.draw(0, 0, ZOrder::Background)
     @model.hero.draw
     #for ennemis
      # @ennemi.draw

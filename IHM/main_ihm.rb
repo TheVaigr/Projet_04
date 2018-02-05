@@ -8,7 +8,8 @@ class MainIHM < Gosu::Window
     super
     self.caption = "Milky Way Light"
     @background_image = Gosu::Image.new("../resources/missil_1.png")
-    @hero = Hero.new(pseudo, arme = Canon.new(), couleur, width/2, height/2)
+    @model = Model.new(1, pseudo, couleur, width, height)
+
     #@song = Gosu::Song.new("res/music.mp3")
     #@song.volume = 0.0
     #@song.play(true)
@@ -30,8 +31,8 @@ class MainIHM < Gosu::Window
   end
 
   def draw
-    @background_image.draw(0, 0, ZOrder::Background)
-    @hero.draw
+    @background_image.draw(0, 0, 1)
+    @model.hero.draw
     #for ennemis
      # @ennemi.draw
     #end

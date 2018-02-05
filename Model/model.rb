@@ -4,9 +4,11 @@ require_relative '../Classes/hero'
 
 class Model
 
-  def initialize(width, height, niveauDifficulte, pseudo)
+  attr_accessor :hero, :niveauDifficulte
+
+  def initialize(niveauDifficulte, pseudo, couleur, width, height)
     @niveauDifficulte = niveauDifficulte
-    @hero = Hero.new(pseudo, armeBase, width/2, height/2)
+    @hero = Hero.new(pseudo, arme = Canon.new(), couleur, width/2, height/2)
   end
 
 

@@ -1,10 +1,10 @@
 class Hero
-
+  attr_accessor :pseudo
   def initialize(pseudo, arme, couleur, x, y)
     @pseudo = pseudo
     @arme = arme
     @vie = 100
-    @vitesse = 100
+    @vitesse = 2
     @progression = 0
     @score = 0
     @couleur = couleur
@@ -13,9 +13,9 @@ class Hero
     @velocityX = 0.0
 
     @images = []
-    @images.push(Gosu::Image.new("../resources/missil_1.png"))
-    #@images.push(Gosu::Image.new("res/hero/gauche.png"))
-    #@images.push(Gosu::Image.new("res/hero/droite.png"))
+    @images.push(Gosu::Image.new("../resources/ship_1_L.png"))
+    @images.push(Gosu::Image.new("../resources/ship_1_N.png"))
+    @images.push(Gosu::Image.new("../resources/ship_1_R.png"))
     @image = @images[0]
   end
 
@@ -24,7 +24,7 @@ class Hero
   end
 
   def go_left
-    @velocityX -= 100
+    @velocityX -= @vitesse
     # changement de l'image du héros : tourné vers la gauche
     @image = @images[0]
   end
@@ -35,7 +35,7 @@ class Hero
   end
 
   def go_right
-    @velocityX += 100
+    @velocityX += @vitesse
     # changement de l'image du héros : tourné vers la droite
     @image = @images[2]
   end

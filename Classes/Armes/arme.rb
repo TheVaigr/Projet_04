@@ -1,6 +1,5 @@
 class Arme
 
-
   def initialize(image, vitesseTir, cadenceTir, degat)
     @vitesseTir = vitesseTir
     @cadenceTir = cadenceTir

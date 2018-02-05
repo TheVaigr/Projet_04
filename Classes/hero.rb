@@ -1,18 +1,19 @@
 class Hero
 
-  def initialize(pseudo, arme, x, y)
+  def initialize(pseudo, arme, couleur x, y)
     @pseudo = pseudo
     @arme = arme
     @vie = 100
     @vitesse = 100
+    @progression = 0
     @score = 0
+    @couleur = couleur
     @x = x
     @y = y
     @velocityX = 0.0
 
     @images = []
     @images.push(Gosu::Image.new("res/hero/face.png"))
-    @images.push(Gosu::Image.new("res/hero/dos.png"))
     @images.push(Gosu::Image.new("res/hero/gauche.png"))
     @images.push(Gosu::Image.new("res/hero/droite.png"))
     @image = @images[0]
@@ -44,10 +45,7 @@ class Hero
   def move
     @x += @velocityX
     @x %= 1024
-    @y += @velocityY
-    @y %= 576
     @velocityX *= 0.1
-    @velocityY *= 0.1
   end
 
 end

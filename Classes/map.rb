@@ -1,2 +1,3 @@
 class Map
+
 end

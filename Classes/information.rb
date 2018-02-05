@@ -1,5 +1,4 @@
 class Information
-  attr_accessor :
 
   def initialize()
     @breed = breed

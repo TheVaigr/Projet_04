@@ -14,9 +14,8 @@ class Controller
     @couleur = 1
 
     @model = Model.new(1, @pseudo, @couleur, WindowWidth, WindowHeight)
-
     @window = MainIHM.new(WindowWidth, WindowHeight, @model)
-    Window.show
+    @window.show
   end
 
 

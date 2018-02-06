@@ -1,8 +1,11 @@
+require_relative 'hitbox'
+
 class Hero
-  attr_accessor :pseudo
-  def initialize(pseudo, arme, couleur, x, y)
+  attr_accessor :pseudo, :armes, :score, :vitesse, :hitbox, :vie
+
+  def initialize(pseudo, couleur, x, y)
     @pseudo = pseudo
-    @arme = arme
+    @armes = []
     @vie = 100
     @vitesse = 5
     @progression = 0
@@ -11,12 +14,8 @@ class Hero
     @x = x
     @y = y
     @velocityX = 0.0
-
-    @images = []
-    @images.push(Gosu::Image.new("../resources/ship_1_L.png"))
-    @images.push(Gosu::Image.new("../resources/ship_1_N.png"))
-    @images.push(Gosu::Image.new("../resources/ship_1_R.png"))
-    @image = @images[0]
+    @image = Gosu::Image.new("../Ressources/ship_1_N.png")
+    @hitbox = Hitbox.new(0,0,@image.width,@image.width)
   end
 
   def draw
@@ -26,18 +25,18 @@ class Hero
   def go_left
     @velocityX -= @vitesse
     # changement de l'image du héros : tourné vers la gauche
-    @image = @images[0]
+    @image = Gosu::Image.new("../Ressources/ship_1_L.png")
   end
 
   def go_front
     # changement de l'image du héros : tout droit
-    @image = @images[1]
+    @image = Gosu::Image.new("../Ressources/ship_1_N.png")
   end
 
   def go_right
     @velocityX += @vitesse
     # changement de l'image du héros : tourné vers la droite
-    @image = @images[2]
+    @image = Gosu::Image.new("../Ressources/ship_1_R.png")
   end
 
   def move
@@ -55,6 +54,11 @@ class Hero
       return true
     end
     return false
+  end
+
+  def majHitbox
+    @hitbox.x = @x + 1/3 * @image.width
+    @hitbox.y = @y + 1/3 * @image.height
   end
 
 end

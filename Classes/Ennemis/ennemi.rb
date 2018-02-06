@@ -1,5 +1,7 @@
-class Ennemi
+require_relative '../hitbox'
 
+class Ennemi
+attr_accessor :image, :degatCollision, :degatTir, :ptsVie, :vitesseDeplacement, :vitesseTir, :cadenceTir, :hitbox,:x, :y
   def initialize(image, degatCollision, degatTir, ptsVie, vitesseDeplacement, vitesseTir, cadenceTir, hitbox, x, y)
     @x = x
     @y = y
@@ -11,8 +13,8 @@ class Ennemi
     @vitesseTir = vitesseTir
     @cadenceTir = cadenceTir
 
-
     @image = image
+    @hitbox = Hitbox.new(0,0,@image.width,@image.width)
   end
 
   def draw
@@ -26,5 +28,9 @@ class Ennemi
     return false
   end
 
+  def majHitbox
+    @hitbox.x = @x + 1/3 * @image.width
+    @hitbox.y = @y + 1/3 * @image.height
+  end
 
 end

@@ -1,14 +1,18 @@
 require_relative 'ennemi'
+require_relative '../../Classes/hitbox'
 
 class Gardien < Ennemi
 
-  def initialize(image = Gosu::Image.new("../resources/enemie_2_fighter_N.png"),
-                 degatCollision = 100,
+
+
+  def initialize(image = Gosu::Image.new("../Ressources/enemie_2_fighter_N.png"),
+                 degatCollision = 10,
                  degatTir = 100,
                  ptsVie = 100,
                  vitesseDeplacement = 100,
                  vitesseTir = 100,
                  cadenceTir = 100,
+                 hitbox = Hitbox.new(2,3,100,100),
                  x,
                  y)
     super

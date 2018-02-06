@@ -1,7 +1,9 @@
 require_relative 'ennemi'
+require_relative 'Classes/hitbox'
 
 class Bomber < Ennemi
 
+  attr_accessor :distanceX, :distanceY
   def initialize(image = Gosu::Image.new("../Ressources/enemie_2_fighter_N.png"),
                  degatCollision = 10,
                  degatTir = 100,

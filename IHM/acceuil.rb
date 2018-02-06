@@ -3,7 +3,7 @@ class Acceuil < Gosu::Window
   def initialize(width, height)
     super
     self.caption = "Acceuil"
-    @background_image = Gosu::Image.new("../resources/test.jpg")
+    @background_image = Gosu::Image.new("../ressources/test.jpg")
     @font1 = Gosu::Font.new(70)
     @font2 = Gosu::Font.new(40)
     @pos_1 = (width-@font1.text_width("Milky Way Light")) / 2 # Titre
@@ -46,6 +46,7 @@ class Acceuil < Gosu::Window
   def update
     @pos_x = mouse_x
     @pos_y = mouse_y
+
   end
 
 

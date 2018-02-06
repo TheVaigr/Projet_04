@@ -3,39 +3,49 @@ class Acceuil < Gosu::Window
   def initialize(width, height)
     super
     self.caption = "Acceuil"
-    #@background_image = Gosu::Image.new("../resources/test.jpg")
+    @background_image = Gosu::Image.new("../resources/test.jpg")
     @font1 = Gosu::Font.new(70)
-    @font2 = Gosu::Font.new(self, "Arial", 40)
-    @pos_1 = (width-@font1.text_width("Nom du jeu")) / 2
-    @pos_2 = (width-@font2.text_width("Jouer")) / 2
-
+    @font2 = Gosu::Font.new(40)
+    @pos_1 = (width-@font1.text_width("Milky Way Light")) / 2 # Titre
+    @pos_2 = (width-@font2.text_width("Jouer")) / 2 # Bouton pour jouer
+    @pos_3 = (width-@font2.text_width("Classement")) / 2 # Bouton du classement
+    @pos_4 = (width-@font2.text_width("Règles")) / 2 # Bouton des regles
+    @pos_5 = (width-@font2.text_width("Quitter")) / 2 # Bouton pour quitter
+    @pos_x = mouse_x # Position verticale de la sourie
+    @pos_y = mouse_y # Position horizontal de la sourie
   end
 
-  COLORS = {
-      red: Gosu::Color.new(255, 255, 0, 0),
-      blue: Gosu::Color.new(0, 0, 255),
-      white: Gosu::Color.new(0xff_ffffff)
-  }
-
   def draw
-    #@background_image.draw(0, 0, 0)
-    @font1.draw("Nom du jeu", @pos_1, 70, 0)
-    @font2.draw("Jouer", @pos_2, 200, 0)
-    @font2.draw("Classement", @pos_2 - 30, 300, 0)
-    @font2.draw("Règles", @pos_2, 400, 0)
-    @font2.draw("Quitter", @pos_2, 500, 0)
+    @background_image.draw(0, 0, 0)
+    @font1.draw("Milky Way Light", @pos_1, 70, 1)
+    @font2.draw("Jouer", @pos_2, 200, 1)
+    @font2.draw("Classement", @pos_3, 300, 1)
+    @font2.draw("Règles", @pos_4, 400, 1)
+    @font2.draw("Quitter", @pos_5, 500, 1)
   end
 
   def needs_cursor?
     true
   end
 
-
+  # Détection de la localisation de la sourie
+  def button_up(id)
+    if id == Gosu::MS_LEFT
+      if @pos_x < 585 && @pos_x > 435 && @pos_y < 255 && @pos_y > 185
+        puts "Jouer"
+      elsif @pos_x < 635 && @pos_x > 385 && @pos_y < 355 && @pos_y > 285
+        puts "Classement"
+      elsif @pos_x < 585 && @pos_x > 435 && @pos_y < 455 && @pos_y > 385
+        puts "Regles"
+      elsif @pos_x < 585 && @pos_x > 435 && @pos_y < 555 && @pos_y > 485
+        puts "Quitter"
+      end
+    end
+  end
 
   def update
-    if button_down?(Gosu::MS_LEFT) # Détection bouton gauche souris enfoncé
-      puts "Et tu cliques, cliques, cliques"
-    end
+    @pos_x = mouse_x
+    @pos_y = mouse_y
   end
 
 

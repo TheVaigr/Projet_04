@@ -5,11 +5,15 @@ require_relative '../Classes/z_order'
 
 class MainIHM < Gosu::Window
 
-  def initialize(width, height, pseudo, couleur)
+  def initialize(width, height, model)
+
     super width, height
     self.caption = "Milky Way Light"
     @background_image = Gosu::Image.new("../resources/ecrant_acceuil.png")
-    @model = Model.new(1, pseudo, couleur, width, height)
+
+    @vitesseAutoScroll = model.niveauDifficulte * 1.25
+    @ennemis = []
+    @ennemis[0] = Gardien.new(900,50)
 
     #@song = Gosu::Song.new("res/music.mp3")
     #@song.volume = 0.0

@@ -13,7 +13,10 @@ class Model
     @vitesseAutoScroll = @niveauDifficulte * 1.25
     @ennemis = []
     @ennemis[0] = Gardien.new(900,50)
+
   end
 
-
+  def Collision(position1, position2)
+    if position1.xa
+    end
 end

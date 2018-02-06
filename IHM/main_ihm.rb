@@ -28,6 +28,13 @@ class MainIHM < Gosu::Window
     @model.hero.move
 
 
+    for i in 0..@model.ennemis.size-1
+      if @model.ennemis[i].estMort == true
+        @model.ennemis.delete(@model.ennemis[i])
+      end
+      @model.ennemis[i].seDeplacer(@model.vitesseAutoScroll,@model.niveauDifficulte)
+    end
+
     close if Gosu::button_down?(Gosu::KbEscape)
 
   end
@@ -37,7 +44,6 @@ class MainIHM < Gosu::Window
     @model.hero.draw
 
     for i in 0..(@model.ennemis.size-1)
-      @model.ennemis[i].seDeplacer(@model.vitesseAutoScroll,@model.niveauDifficulte)
       @model.ennemis[i].draw
     end
 

@@ -4,7 +4,7 @@ class Hero
     @pseudo = pseudo
     @arme = arme
     @vie = 100
-    @vitesse = 2
+    @vitesse = 5
     @progression = 0
     @score = 0
     @couleur = couleur

@@ -1,11 +1,11 @@
 class Hitbox
-  attr_accessor :xa, :xb, :ya, :yb
+  attr_accessor :x, :y, :width, :height
 
-  def initialize
-    @xa = 0
-    @xb = 0
-    @ya = 0
-    @yb = 0
+  def initialize(x, y, width, height)
+    @x = x
+    @y = y
+    @width = width
+    @height = height
   end
 
 end

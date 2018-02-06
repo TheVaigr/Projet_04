@@ -1,5 +1,4 @@
 require_relative 'ennemi'
-require_relative '../../Classes/hitbox'
 
 class Gardien < Ennemi
 
@@ -12,7 +11,7 @@ class Gardien < Ennemi
                  vitesseDeplacement = 100,
                  vitesseTir = 100,
                  cadenceTir = 100,
-                 hitbox = Hitbox.new(2,3,100,100),
+                 hero,
                  x,
                  y)
     super

@@ -3,6 +3,7 @@ require_relative '../Classes/hero'
 require_relative '../Classes/Armes/canon'
 require_relative '../Classes/z_order'
 
+
 class MainIHM < Gosu::Window
 
   def initialize(width, height, model)
@@ -13,12 +14,12 @@ class MainIHM < Gosu::Window
     @model = model
     @vitesseAutoScroll = model.niveauDifficulte * 4
     @ennemis = []
-    @ennemis[0] = Gardien.new(900,50)
-    @ennemis[1] = Gardien.new(800,50)
+    @ennemis[0] = Gardien.new(@model.hero,900,50)
+    @ennem = Bomber.new(@model.hero, 800 , 50)
 
-    #@song = Gosu::Song.new("res/music.mp3")
-    #@song.volume = 0.0
-    #@song.play(true)
+    @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
+    @song.volume = 0.5
+    @song.play(true)
   end
 
 
@@ -41,19 +42,19 @@ class MainIHM < Gosu::Window
 
     # Parcours les ennemis présent sur l'ihm
     for i in 0..@ennemis.size-1
-      @ennemis[i].seDeplacer(@vitesseAutoScroll,@model.niveauDifficulte)
+      if @ennemis[i] != NIL
+        @ennemis[i].seDeplacer(@vitesseAutoScroll,@model.niveauDifficulte)
 
-      # Test collision entre ennemis et héro
-      if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
-        @model.hero.vie -= @ennemis[i].degatCollision
-        @ennemis.delete(@ennemis[i])
+        # Test collision entre ennemis et héro
+        if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
+          @model.hero.vie -= @ennemis[i].degatCollision
+          @ennemis.delete(@ennemis[i])
 
-
-        # Test si ennemi est sous l'ihm
-      elsif @ennemis[i].estMort
-        @ennemis.delete(@ennemis[i])
+          # Test si ennemi est sous l'ihm
+        elsif @ennemis[i].estMort
+          @ennemis.delete(@ennemis[i])
+        end
       end
-
     end
     close if (Gosu::button_down?(Gosu::KbEscape) || @model.hero.estMort)
 

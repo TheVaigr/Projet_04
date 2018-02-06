@@ -1,8 +1,8 @@
 require_relative '../hitbox'
 
 class Ennemi
-attr_accessor :image, :degatCollision, :degatTir, :ptsVie, :vitesseDeplacement, :vitesseTir, :cadenceTir, :hitbox,:x, :y
-  def initialize(image, degatCollision, degatTir, ptsVie, vitesseDeplacement, vitesseTir, cadenceTir, hitbox, x, y)
+attr_accessor :image, :degatCollision, :degatTir, :ptsVie, :vitesseDeplacement, :vitesseTir, :cadenceTir, :hitbox,:x, :y, :hero
+  def initialize(image, degatCollision, degatTir, ptsVie, vitesseDeplacement, vitesseTir, cadenceTir, hero, x, y)
     @x = x
     @y = y
 
@@ -14,7 +14,7 @@ attr_accessor :image, :degatCollision, :degatTir, :ptsVie, :vitesseDeplacement, 
     @cadenceTir = cadenceTir
 
     @image = image
-    @hitbox = Hitbox.new(0,0,@image.width,@image.width)
+    @hitbox = Hitbox.new(0,0,@image.width*1/3,@image.width*1/3)
   end
 
   def draw

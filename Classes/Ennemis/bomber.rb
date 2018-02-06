@@ -1,25 +1,25 @@
 require_relative 'ennemi'
 
-class Gardien < Ennemi
+class Bomber < Ennemi
 
-  def initialize(image = Gosu::Image.new("../resources/enemie_2_fighter_N.png"),
-                 degatCollision = 100,
+  def initialize(image = Gosu::Image.new("../Ressources/enemie_2_fighter_N.png"),
+                 degatCollision = 10,
                  degatTir = 100,
                  ptsVie = 100,
                  vitesseDeplacement = 100,
                  vitesseTir = 100,
                  cadenceTir = 100,
+                 hero,
                  x,
-                 y,
-                 hero)
+                 y)
     super
-    @dinstanceX = x -= hero.x
-    @dinstanceY = y -= hero.y
+    @distanceX = (hero.hitbox.x + hero.hitbox.width/2) - x
+    @distanceY = (hero.hitbox.y + hero.hitbox.width/2) - y
   end
 
-  def seDeplacer(autoScroll, difficulte, hero)
-    @x -= @dinstanceX/(1/difficulte)
-    @y -= @dinstanceY/(1/difficulte)
+  def seDeplacer(autoScroll, difficulte)
+    @x += @dinstanceX/(1/autoScroll)
+    @y += @dinstanceY/(1/autoScroll)
   end
 
 end

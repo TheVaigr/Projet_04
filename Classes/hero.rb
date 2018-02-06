@@ -15,7 +15,7 @@ class Hero
     @y = y
     @velocityX = 0.0
     @image = Gosu::Image.new("../Ressources/ship_1_N.png")
-    @hitbox = Hitbox.new(0,0,@image.width*1/3,@image.width*1/3)
+    @hitbox = Hitbox.new(@x,@y,@image.width*1/3,@image.width*1/3)
   end
 
   def draw

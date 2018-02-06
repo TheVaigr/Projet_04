@@ -2,7 +2,9 @@ require_relative '../Model/model'
 require_relative '../Classes/hero'
 require_relative '../Classes/Armes/canon'
 require_relative '../Classes/z_order'
-
+require_relative '../Classes/Ennemis/bomber'
+require_relative '../Classes/Ennemis/gardien'
+require_relative '../Classes/Ennemis/ennemi'
 
 class MainIHM < Gosu::Window
 
@@ -14,8 +16,8 @@ class MainIHM < Gosu::Window
     @model = model
     @vitesseAutoScroll = model.niveauDifficulte * 4
     @ennemis = []
-    @ennemis[0] = Gardien.new(@model.hero,900,50)
-    @ennem = Bomber.new(@model.hero, 800 , 50)
+    @ennemis[0] = Gardien.new(900,50)
+    @ennemis[1] = Bomber.new(800 , 50)
 
     @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
     @song.volume = 0.5
@@ -43,7 +45,7 @@ class MainIHM < Gosu::Window
     # Parcours les ennemis présent sur l'ihm
     for i in 0..@ennemis.size-1
       if @ennemis[i] != NIL
-        @ennemis[i].seDeplacer(@vitesseAutoScroll,@model.niveauDifficulte)
+        @ennemis[i].seDeplacer(@vitesseAutoScroll,@model.niveauDifficulte, @model.hero)
 
         # Test collision entre ennemis et héro
         if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)

@@ -11,14 +11,13 @@ class Gardien < Ennemi
                  vitesseDeplacement = 100,
                  vitesseTir = 100,
                  cadenceTir = 100,
-                 hero,
                  x,
                  y)
     super
     @direction = "gauche"
   end
 
-  def seDeplacer(autoScroll, difficulte)
+  def seDeplacer(autoScroll, difficulte, hero)
     if @x == 0
       @direction = "droite"
     elsif @x == 1920-70

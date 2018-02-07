@@ -3,12 +3,12 @@ class Projectile
 
   def initialize(vitesse, type, provenance, degat, x, y)
     @type = type
-    @x = x
     @y = y
     @degat = degat
     @provenance = provenance
     @vitesse = vitesse
     defImg
+    @x = x - @image.width/2
     defHitbox
   end
 

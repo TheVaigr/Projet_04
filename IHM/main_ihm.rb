@@ -63,7 +63,7 @@ class MainIHM < Gosu::Window
     # Deplacement des ennemis, collisions avec hero, mort de l'ennemi si hors map
     for i in 0..@ennemis.size-1
       if @ennemis[i] != nil
-        @ennemis[i].seDeplacer(@vitesseAutoScroll,@difficulte, @model.hero)
+        @ennemis[i].seDeplacer(@difficulte)
         # Test collision entre ennemis et héro
         if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
           @model.hero.vie -= @ennemis[i].degatCollision
@@ -115,14 +115,14 @@ class MainIHM < Gosu::Window
     end
 
     # Tir du héro
-    if ((@frame % 20) == 0) #@model.hero.arme.cadenceTir
+    if ((@frame % @model.hero.arme.cadenceTir) == 0) #@model.hero.arme.cadenceTir
       @projectilesAllies.push(@model.hero.tire)
     end
 
     # Tir des ennemis
     for i in 0..@ennemis.size-1
       if @ennemis[i].arme != nil
-        if (@frame % 20) == 0
+        if (@frame.to_f % @model.getCadenceTirArtilleur.to_f) == 0.0
           @projectilesEnnemis.push(@ennemis[i].tire)
         end
       end
@@ -130,14 +130,16 @@ class MainIHM < Gosu::Window
 
     # Génération des ennemis aléatoire
     postGame = 0
-    if @frame > @DEBUT_JEU && (@frame % 100 == 0) && @frame < @FIN_JEU
+    if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+20) == 0.0) && @frame < @FIN_JEU
       r = @r.rand(0...3)
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 1
         @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 2
-        #@ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        for i in 0..@r.rand(0...3)
+          @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        end
       end
     end
 

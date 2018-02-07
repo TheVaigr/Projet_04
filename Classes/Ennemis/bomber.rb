@@ -16,9 +16,21 @@ class Bomber < Ennemi
     @arme = nil
   end
 
-  def seDeplacer(autoScroll, difficulte, hero)
-    @x = hero.x
-    @y = @y + autoScroll
+  def seDeplacer(difficulte)
+    if @x <= 480.0
+      @direction = "droite"
+    elsif @x >= 1440.0-100
+      @direction = "gauche"
+    end
+
+    if @direction == "gauche"
+
+      @x -= difficulte*4
+    else
+      @x += difficulte*4
+    end
+
+    @y += difficulte*4
   end
 
 end

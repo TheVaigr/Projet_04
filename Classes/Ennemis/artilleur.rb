@@ -8,30 +8,16 @@ class Artilleur < Ennemi
                  degatTir = 20,
                  vie = 100,
                  vitesseDeplacement = 100,
-                 vitesseTir = 10,
-                 cadenceTir = 100,
+                 vitesseTir = 3,
+                 cadenceTir = 60,
                  x,
                  y)
     super
     @arme = Mitraillette.new
-    @direction = "gauche"
   end
 
-  def seDeplacer(autoScroll, difficulte, hero)
-    if @x <= 480.0
-      @direction = "droite"
-    elsif @x >= 1440.0
-      @direction = "gauche"
-    end
-
-    if @direction == "gauche"
-
-      @x -= difficulte*3
-    else
-      @x += difficulte*3
-    end
-
-    @y += autoScroll
+  def seDeplacer(difficulte)
+    @y += 1.5
   end
 
   def tire

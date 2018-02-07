@@ -123,7 +123,6 @@ class MainIHM < Gosu::Window
     postGame = 0
     if @frame > postGame && (@frame % 100 == 0)
       r = @r.rand(0...3)
-      puts r
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
       elsif r == 1
@@ -133,6 +132,20 @@ class MainIHM < Gosu::Window
       end
     end
 
+    for i in 0..@projectilesAllies.size-1
+      if @projectilesAllies[i] != NIL
+        if @projectilesAllies[i].y < 0
+          @projectilesAllies.delete@projectilesAllies[i]
+        end
+      end
+    end
+    for i in 0..@projectilesEnnemis.size-1
+      if @projectilesEnnemis[i] != NIL
+        if @projectilesEnnemis[i].y > @height
+          @projectilesEnnemis.delete@projectilesEnnemis[i]
+        end
+      end
+    end
 
     close if Gosu::button_down?(Gosu::KbEscape)
 
@@ -151,7 +164,6 @@ end
     if !@model.hero.estMort
       @model.hero.draw
       else
-      puts "mort"
     end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw

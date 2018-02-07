@@ -21,7 +21,6 @@ attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vi
   end
 
   def draw
-    @carre = Gosu::draw_rect(@hitbox.x, @hitbox.y, @hitbox.width, @hitbox.height, Gosu::Color.new(100, 255, 255, 255))
     @image.draw(@x, @y, ZOrder::Ennemis)
     @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y, Gosu::Color.new(0xff_00ff00))
     @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y+1, Gosu::Color.new(0xff_00ff00))

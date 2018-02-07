@@ -13,7 +13,7 @@ class Hero
     chargerArmes
     @arme = @armes[0]
     @vie = 100
-    @vitesse = 5
+    @vitesse = 8
     @progression = 0
     @score = 0
     @couleur = couleur
@@ -68,12 +68,12 @@ class Hero
   end
 
   def majHitbox
-    @hitbox.x = @x + 1/3 * @image.width
-    @hitbox.y = @y + 1/3 * @image.height
+    @hitbox.x = @x + @image.width/3
+    @hitbox.y = @y + @image.height/3
   end
 
   def tire
-    return Projectile.new(@vitesseTir, @arme.type, "allie", @arme.degat, @x + @image.width/2, @y + @image.height/3)
+    return Projectile.new(@arme.vitesseTir, @arme.type, "allie", @arme.degat, @x + @image.width/2, @y + @image.height/3)
   end
 
   def changeArme

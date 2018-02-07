@@ -8,7 +8,7 @@ class Artilleur < Ennemi
                  degatTir = 100,
                  vie = 100,
                  vitesseDeplacement = 100,
-                 vitesseTir = 100,
+                 vitesseTir = 10,
                  cadenceTir = 100,
                  x,
                  y)

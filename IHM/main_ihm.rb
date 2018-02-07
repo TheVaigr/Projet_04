@@ -12,6 +12,7 @@ class MainIHM < Gosu::Window
 
   attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame
 
+
   def initialize(width, height, difficulte, model)
 
     super width, height
@@ -25,9 +26,7 @@ class MainIHM < Gosu::Window
     @projectilesEnnemis = []
     @width = width
     @height = height
-    @ennemis[0] = Gardien.new(900,50)
-    @ennemis[1] = Bomber.new(800 , 50)
-    @ennemis[2] = Artilleur.new(800 , 50)
+
 
     @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
     @song.volume = 0.0
@@ -35,6 +34,17 @@ class MainIHM < Gosu::Window
 
     @frame = 0
     @r = Random.new
+
+    @font1 = Gosu::Font.new(35)
+    @font2 = Gosu::Font.new(25)
+    @nom = "Marc"
+    @lvl = 0
+    @score = 0
+    @progression = 0
+    @arme = "mitrailleuse"
+    @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
+    @DEBUT_JEU = 200
+    @FIN_JEU
   end
 
 ##################################################################################################
@@ -44,7 +54,7 @@ class MainIHM < Gosu::Window
     # déplacement du héro
     if (!Gosu::button_down?(Gosu::KbRight)) && (!Gosu::button_down?(Gosu::KbLeft))
       @model.hero.go_front
-    elsif Gosu::button_down?(Gosu::KbRight) && @model.hero.x < @width*0.75
+    elsif Gosu::button_down?(Gosu::KbRight) && @model.hero.x < @width*0.75 - @model.hero.image.width
       @model.hero.go_right
     elsif Gosu::button_down?(Gosu::KbLeft) && @model.hero.x > @width*0.25
       @model.hero.go_left
@@ -121,14 +131,14 @@ class MainIHM < Gosu::Window
 
     # Génération des ennemis aléatoire
     postGame = 0
-    if @frame > postGame && (@frame % 100 == 0)
+    if @frame > @DEBUT_JEU && (@frame % 100 == 0)
       r = @r.rand(0...3)
       if r == 0
-        @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
+        @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 1
-        @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75),0))
+        @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 2
-        @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75),0))
+        @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
       end
     end
 
@@ -147,6 +157,9 @@ class MainIHM < Gosu::Window
         end
       end
     end
+
+
+    @lvl += 1
 
     close if Gosu::button_down?(Gosu::KbEscape)
 
@@ -169,6 +182,21 @@ end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw
     end
+
+    @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
+    @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
+
+    @font1.draw(@nom, 240-@font1.text_width(@nom)/2, 100, 2)
+    @font1.draw("LVL : ", 240-@font1.text_width("LVL : ")/2, 200, 2)
+    @font1.draw(@lvl/1000, 240+@font1.text_width("LVL : ")/2, 200, 2)
+    @font1.draw("Progression : ", 240-@font1.text_width("Progression :  ")/2, 300, 2)
+    @font1.draw(@progression/10, 240+@font1.text_width("Progression :  ")/2, 300, 2)
+    @font1.draw("%", 260+@font1.text_width("Progression : 100")/2, 300, 2)
+    @font1.draw("Score : ", 240-@font1.text_width("Score : ")/2, 400, 2)
+    @font1.draw(@score, 240+@font1.text_width("Score : ")/2, 400, 2)
+    @font1.draw("armes", 240-@font1.text_width("armes")/2, 500, 2)
+    @font1.draw("bonus", 240-@font1.text_width("bonus")/2, 600, 2)
+
   end
 
   def button_up(id)

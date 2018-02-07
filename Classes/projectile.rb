@@ -6,11 +6,11 @@ class Projectile
     @x = x
     @y = y
     @degat = degat
+    @provenance = provenance
+    @vitesse = vitesse
     defImg
     defHitbox
     defVitesse
-    @provenance = provenance
-    @vitesse = vitesse
   end
 
 
@@ -38,9 +38,12 @@ class Projectile
   def defImg
     if @type == "mitraillette"
       if @provenance == "allie"
-        @image = Gosu::Image.new("../Ressources/tire_vert.png")
+        @image = Gosu::Image.new("../Ressources/missil_1.png")
+        puts"proj allie"
       else
         @image = Gosu::Image.new("../Ressources/tire_violet.png")
+        puts"proj enn"
+
       end
     else
       @image = Gosu::Image.new("../Ressources/missil_1.png")

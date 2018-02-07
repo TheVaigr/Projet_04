@@ -27,6 +27,7 @@ class MainIHM < Gosu::Window
     @height = height
     @ennemis[0] = Gardien.new(900,50)
     @ennemis[1] = Bomber.new(800 , 50)
+    @ennemis[2] = Artilleur.new(800 , 50)
 
     @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
     @song.volume = 0.0
@@ -101,9 +102,11 @@ class MainIHM < Gosu::Window
     end
 
     # Tir du héro
-    if ((@frame % 3) == 0) #@model.hero.arme.cadenceTir
+    #if ((@frame % 3) == 0) #@model.hero.arme.cadenceTir
       @projectilesAllies.push(@model.hero.tire)
-    end
+    puts @projectilesAllies.size
+
+    #end
 
     # Tir des ennemis
     for i in 0..@ennemis.size-1
@@ -116,7 +119,7 @@ class MainIHM < Gosu::Window
 
     # Génération des ennemis aléatoire
     postGame = 300
-    if @frame > postGame && @frame % (@difficulte * 200) == 0
+    if @frame > postGame && (@frame % (@difficulte * 200) == 0)
       r = @r.rand(10...42)
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
@@ -136,6 +139,9 @@ end
 
   def draw
     @background_image.draw(0, 0, ZOrder::Background)
+    for i in 0..@projectilesAllies.size-1
+      @projectilesAllies[i].draw
+    end
     if !@model.hero.estMort
       @model.hero.draw
     end

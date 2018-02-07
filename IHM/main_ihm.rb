@@ -99,6 +99,7 @@ class MainIHM < Gosu::Window
     for i in 0..@projectilesEnnemis.size-1
       if @projectilesEnnemis[i] != NIL
         if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
+          @model.hero.vie = @model.hero.vie - @projectilesEnnemis[i].degat
           @projectilesEnnemis.delete(@projectilesEnnemis[i])
         end
       end
@@ -112,9 +113,9 @@ class MainIHM < Gosu::Window
     # Tir des ennemis
     for i in 0..@ennemis.size-1
       if @ennemis[i].arme != NIL
-        #if (@frame % @ennemis[i].arme.cadenceTir) == 0
+        if (@frame % 20) == 0
           @projectilesEnnemis.push(@ennemis[i].tire)
-        #end
+        end
       end
     end
 
@@ -142,6 +143,9 @@ end
     @background_image.draw(0, 0, ZOrder::Background)
     for i in 0..@projectilesAllies.size-1
       @projectilesAllies[i].draw
+    end
+    for i in 0..@projectilesEnnemis.size-1
+      @projectilesEnnemis[i].draw
     end
     if !@model.hero.estMort
       @model.hero.draw

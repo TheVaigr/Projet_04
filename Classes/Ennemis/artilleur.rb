@@ -35,6 +35,6 @@ class Artilleur < Ennemi
   end
 
   def tire
-    return Projectile.new("mitraillette", "ennemi", @arme.degat, @x+@hitbox.x/2, @y+@hitbox.y)
+    return Projectile.new("mitraillette", "ennemi",5, @x, @y)
   end
 end

@@ -18,9 +18,9 @@ class Bomber < Ennemi
 
   def seDeplacer(autoScroll, difficulte, hero)
     @distanceX = @x - (hero.hitbox.x + hero.hitbox.width/2)
-    @distanceY = @y - (hero.hitbox.y + hero.hitbox.width/2)
+    @distanceY = @y - (hero.hitbox.y + hero.hitbox.height/2)
 
-    @x = @x - @distanceX/99
+    @x = @x - @distanceX
     @y = @y + autoScroll
     autoScroll = difficulte
   end

@@ -1,11 +1,17 @@
 require_relative 'hitbox'
+require_relative 'projectile'
+require_relative 'Armes/canon'
+require_relative 'Armes/mitraillette'
+require_relative 'Armes/arme'
 
 class Hero
-  attr_accessor :pseudo, :armes, :score, :vitesse, :hitbox, :vie
+  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie
 
   def initialize(pseudo, couleur, x, y)
     @pseudo = pseudo
     @armes = []
+    chargerArmes
+    @arme = @armes[0]
     @vie = 100
     @vitesse = 5
     @progression = 0
@@ -20,6 +26,10 @@ class Hero
 
   def draw
     @image.draw(@x, @y, ZOrder::Hero)
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+@image.height, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@ptsVie)/50)*20, @y+@image.height, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1+@image.height, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@ptsVie)/50)*20, @y+1+@image.height, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@ptsVie)/50)*20 , @y+@image.height, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+@image.height, Gosu::Color.new(0xff_ff0000))
+    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@ptsVie)/50)*20 , @y+1+@image.height, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+1+@image.height, Gosu::Color.new(0xff_ff0000))
   end
 
   def go_left
@@ -41,7 +51,6 @@ class Hero
 
   def move
     @x += @velocityX
-    @x %= 1920
     @velocityX *= 0.1
   end
 
@@ -59,6 +68,27 @@ class Hero
   def majHitbox
     @hitbox.x = @x + 1/3 * @image.width
     @hitbox.y = @y + 1/3 * @image.height
+  end
+
+  def tire
+    return Projectile.new(@arme.type, "allie", @arme.degat, @x+@hitbox.x/2, @y-@hitbox.y)
+  end
+
+  def changeArme
+    for i in @armes.size-1
+      if @armes[i] == @arme
+        if i == @armes.size-1
+          @arme = arme[0]
+        else
+          @arme = @armes
+        end
+      end
+    end
+  end
+
+  def chargerArmes
+    @armes.push(Mitraillette.new)
+    @armes.push(Canon.new)
   end
 
 end

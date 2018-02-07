@@ -9,8 +9,7 @@ class Model
 
   attr_accessor :hero, :niveauDifficulte
 
-  def initialize(niveauDifficulte, pseudo, couleur, width, height)
-    @niveauDifficulte = niveauDifficulte
+  def initialize(pseudo, couleur, width, height)
     @hero = Hero.new(pseudo, couleur, width/2, height-100)
   end
 

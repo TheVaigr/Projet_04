@@ -23,7 +23,8 @@ class MainIHM < Gosu::Window
     @ennemis = []
     @projectilesAllies = []
     @projectilesEnnemis = []
-
+    @width = width
+    @height = height
     @ennemis[0] = Gardien.new(900,50)
     @ennemis[1] = Bomber.new(800 , 50)
 
@@ -41,9 +42,9 @@ class MainIHM < Gosu::Window
     # déplacement du héro
     if (!Gosu::button_down?(Gosu::KbRight)) && (!Gosu::button_down?(Gosu::KbLeft))
       @model.hero.go_front
-    elsif Gosu::button_down?(Gosu::KbRight) && @model.hero.x < @widht*0.75
+    elsif Gosu::button_down?(Gosu::KbRight) && @model.hero.x < @width*0.75
       @model.hero.go_right
-    elsif Gosu::button_down?(Gosu::KbLeft) && @model.hero.x > @widht*0.25
+    elsif Gosu::button_down?(Gosu::KbLeft) && @model.hero.x > @width*0.25
       @model.hero.go_left
     end
     @model.hero.move
@@ -69,11 +70,11 @@ class MainIHM < Gosu::Window
       @ennemis[i].majHitbox
     end
     for i in 0..@projectilesAllies.size-1
-      @projectilesAllies[i].seDeplace
+      @projectilesAllies[i].seDeplacer
       @projectilesAllies[i].majHitbox
     end
     for i in 0..@projectilesEnnemis.size-1
-      @projectilesEnnemis[i].seDeplace
+      @projectilesEnnemis[i].seDeplacer
       @projectilesEnnemis[i].majHitbox
     end
 
@@ -100,7 +101,7 @@ class MainIHM < Gosu::Window
 
     # Tir du héro
 
-    if ((@frame % @model.hero.arme.cadenceTir) == 0)
+    if ((@frame % 3) == 0) #@model.hero.arme.cadenceTir
       @projectilesAllies.push(@model.hero.tire)
     end
 
@@ -115,14 +116,14 @@ class MainIHM < Gosu::Window
 
     # Génération des ennemis aléatoire
     postGame = 300
-    if @frame > postGame && @frame % @difficulte * 200
-      r = rand(0...3)
+    if @frame > postGame && @frame % (@difficulte * 200) == 0
+      r = @r.rand(0...3)
       if r == 0
-        @ennemis.push(Artilleur.new(random(@width*0.25...@width*0.75),0))
+        @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
       elsif r == 1
-        @ennemis.push(Bomber.new(random(@width*0.25...@width*0.75),0))
+        @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75),0))
       elsif r == 2
-        @ennemis.push(Gardien.new(random(@width*0.25...@width*0.75),0))
+        @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75),0))
       end
     end
 

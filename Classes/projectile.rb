@@ -15,7 +15,7 @@ class Projectile
 
 
   def draw
-    @image.draw(@x, @y, ZOrder::Hero)
+    @image.draw(@x, @y, ZOrder::Tir)
   end
 
   def seDeplacer
@@ -36,7 +36,7 @@ class Projectile
 
 
   def defImg
-    if @type == "Tir"
+    if @type == "mitraillette"
       if @provenance == "allie"
         @image = Gosu::Image.new("../Ressources/tire_vert.png")
       else

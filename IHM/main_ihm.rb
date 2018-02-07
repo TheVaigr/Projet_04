@@ -106,8 +106,6 @@ class MainIHM < Gosu::Window
     # Tir du héro
     if ((@frame % 20) == 0) #@model.hero.arme.cadenceTir
       @projectilesAllies.push(@model.hero.tire)
-
-
     end
 
     # Tir des ennemis
@@ -120,9 +118,9 @@ class MainIHM < Gosu::Window
     end
 
     # Génération des ennemis aléatoire
-    postGame = 300
-    if @frame > postGame && (@frame % (@difficulte * 200) == 0)
-      r = @r.rand(10...42)
+    postGame = 0
+    if @frame > postGame && (@frame % 100 == 0)
+      r = @r.rand(0...3)
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
       elsif r == 1

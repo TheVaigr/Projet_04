@@ -18,9 +18,9 @@ class Artilleur < Ennemi
   end
 
   def seDeplacer(autoScroll, difficulte, hero)
-    if @x == 0
+    if @x == 1920*0.25
       @direction = "droite"
-    elsif @x == 1920-70
+    elsif @x == 1920*0.75-70
       @direction = "gauche"
     end
 

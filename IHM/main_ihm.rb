@@ -97,9 +97,10 @@ class MainIHM < Gosu::Window
 
     # Test de collision entre hero et projectiles ennemis
     for i in 0..@projectilesEnnemis.size-1
-      if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
-        @model.hero.vie =  @model.hero.vie - @projectilesEnnemis[i].degat
-        @projectilesEnnemis.delete_at(i)
+      if @projectilesEnnemis[i] != NIL
+        if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
+          @projectilesEnnemis.delete(@projectilesEnnemis[i])
+        end
       end
     end
 
@@ -111,9 +112,9 @@ class MainIHM < Gosu::Window
     # Tir des ennemis
     for i in 0..@ennemis.size-1
       if @ennemis[i].arme != NIL
-        if (@frame % @ennemis[i].arme.cadenceTir) == 0
+        #if (@frame % @ennemis[i].arme.cadenceTir) == 0
           @projectilesEnnemis.push(@ennemis[i].tire)
-        end
+        #end
       end
     end
 
@@ -144,6 +145,8 @@ end
     end
     if !@model.hero.estMort
       @model.hero.draw
+      else
+      puts "mort"
     end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw

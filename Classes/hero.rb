@@ -26,10 +26,11 @@ class Hero
 
   def draw
     @image.draw(@x, @y, ZOrder::Hero)
-    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+@image.height, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@ptsVie)/50)*20, @y+@image.height, Gosu::Color.new(0xff_00ff00))
-    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1+@image.height, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@ptsVie)/50)*20, @y+1+@image.height, Gosu::Color.new(0xff_00ff00))
-    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@ptsVie)/50)*20 , @y+@image.height, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+@image.height, Gosu::Color.new(0xff_ff0000))
-    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@ptsVie)/50)*20 , @y+1+@image.height, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+1+@image.height, Gosu::Color.new(0xff_ff0000))
+    # barre de vie
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+@image.height, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y+@image.height, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1+@image.height, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y+1+@image.height, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@vie)/50)*20 , @y+@image.height, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+@image.height, Gosu::Color.new(0xff_ff0000))
+    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@vie)/50)*20 , @y+1+@image.height, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+1+@image.height, Gosu::Color.new(0xff_ff0000))
   end
 
   def go_left

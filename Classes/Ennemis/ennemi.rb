@@ -22,10 +22,10 @@ attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vi
 
   def draw
     @image.draw(@x, @y, ZOrder::Ennemis)
-    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@ptsVie)/50)*20, @y, Gosu::Color.new(0xff_00ff00))
-    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@ptsVie)/50)*20, @y+1, Gosu::Color.new(0xff_00ff00))
-    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@ptsVie)/50)*20 , @y, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y, Gosu::Color.new(0xff_ff0000))
-    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@ptsVie)/50)*20 , @y+1, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+1, Gosu::Color.new(0xff_ff0000))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y+1, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@vie)/50)*20 , @y, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y, Gosu::Color.new(0xff_ff0000))
+    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@vie)/50)*20 , @y+1, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+1, Gosu::Color.new(0xff_ff0000))
   end
 
   def estMort

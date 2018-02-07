@@ -10,7 +10,7 @@ class Model
   attr_accessor :hero, :niveauDifficulte
 
   def initialize(pseudo, couleur, width, height)
-    @hero = Hero.new(pseudo, couleur, width/2, height-100)
+    @hero = Hero.new(pseudo, couleur, width/2, height-150)
   end
 
   def collision(hitbox1, hitbox2)

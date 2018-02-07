@@ -18,7 +18,7 @@ class MainIHM < Gosu::Window
 
     super width, height
     self.caption = "Milky Way Light"
-    @background_image = Gosu::Image.new("../Ressources/ecrant_acceuil.png")
+
     @model = model
     @difficulte = difficulte
     @vitesseAutoScroll = @difficulte * 4
@@ -39,15 +39,27 @@ class MainIHM < Gosu::Window
     @font2 = Gosu::Font.new(25)
     @score = 0
     @progression = 0
-    @arme = "mitrailleuse"
+    @background1 = 0
+    @background_image = Gosu::Image.new("../ressources/background.png")
+    @background2 = -1080
+    #@arme = "mitrailleuse"
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
   end
 
 ##################################################################################################
   def update
     @frame = @frame + 1
-    if @progression < 1000
-      @progression = (@frame*1000)/@FIN_JEU
+    if @progression < 100
+      @progression = (@frame*100)/@FIN_JEU
+    end
+
+    @background1 += 3
+    @background2 += 3
+    if @background1 == 1080
+      @background1 = 0
+    end
+    if @background2 == 0
+      @background2 = -1080
     end
 
     # déplacement du héro
@@ -166,7 +178,8 @@ end
 
 
   def draw
-    #@background_image.draw(0, 0, ZOrder::Background)
+    background_image.draw(480,@background1,-1)
+    background_image.draw(480,@background2,-1)
     for i in 0..@projectilesAllies.size-1
       @projectilesAllies[i].draw
     end
@@ -183,15 +196,17 @@ end
     @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
 
-    @font1.draw(@model.hero.pseudo, 240-@font1.text_width(@nom)/2, 100, 2)
-    @font1.draw("NIVEAU : ", 240-@font1.text_width("NIVEAU : ")/2, 200, 2)
-    @font1.draw(@difficulte/1000, 240+@font1.text_width("NIVEAU : ")/2, 200, 2)
-    @font1.draw("Progression : ", 240-@font1.text_width("Progression :  ")/2, 300, 2)
-    @font1.draw(@progression/10, 240+@font1.text_width("Progression :  ")/2, 300, 2)
-    @font1.draw("%", 260+@font1.text_width("Progression : 100")/2, 300, 2)
-    @font1.draw("Score : ", 240-@font1.text_width("Score : ")/2, 400, 2)
-    @font1.draw(@model.hero.score, 240+@font1.text_width("Score : ")/2, 400, 2)
-    @font1.draw("armes", 240-@font1.text_width("armes")/2, 500, 2)
+
+
+    @font1.draw(@model.hero.pseudo, 240-@font1.text_width(@model.hero.pseudo)/2, 100, 2)
+    @font1.draw("Niveau :", 100, 200, 2)
+    @font1.draw(@difficulte/1000, 300, 200, 2)
+    @font1.draw("Avancée :", 100, 300, 2)
+    @font1.draw(@progression, 300, 300, 2)
+    @font1.draw("%", 355, 300, 2)
+    @font1.draw("Score :", 100, 400, 2)
+    @font1.draw(@model.hero.score, 300, 400, 2)
+    @font1.draw("Armes", 100, 500, 2)
   end
 
   def button_up(id)

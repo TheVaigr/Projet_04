@@ -6,7 +6,7 @@ class Artilleur < Ennemi
   def initialize(image = Gosu::Image.new("../Ressources/enemie_2_fighter_N.png"),
                  degatCollision = 10,
                  degatTir = 100,
-                 ptsVie = 100,
+                 vie = 100,
                  vitesseDeplacement = 100,
                  vitesseTir = 100,
                  cadenceTir = 100,
@@ -18,9 +18,9 @@ class Artilleur < Ennemi
   end
 
   def seDeplacer(autoScroll, difficulte, hero)
-    if @x == 1920*0.25
+    if @x <= 480.0
       @direction = "droite"
-    elsif @x == 1920*0.75-70
+    elsif @x >= 1440.0
       @direction = "gauche"
     end
 
@@ -35,6 +35,6 @@ class Artilleur < Ennemi
   end
 
   def tire
-    return Projectile.new("mitraillette", "ennemi",5, @x, @y)
+    return Projectile.new(@vitesseTir,"mitraillette", "ennemi",5, @x + @image.width/2, @y + @image.height*(2/3))
   end
 end

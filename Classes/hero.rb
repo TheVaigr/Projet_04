@@ -73,7 +73,7 @@ class Hero
   end
 
   def tire
-    return Projectile.new(@arme.type, "allie", @arme.degat, @x, @y)
+    return Projectile.new(@vitesseTir, @arme.type, "allie", @arme.degat, @x + @image.width/2, @y + @image.height/3)
   end
 
   def changeArme

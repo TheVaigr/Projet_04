@@ -1,7 +1,7 @@
 class Projectile
   attr_accessor :y, :x, :type, :degat, :provenance, :hitbox, :vitesse, :image
 
-  def initialize(type, provenance, degat, x, y)
+  def initialize(vitesse, type, provenance, degat, x, y)
     @type = type
     @x = x
     @y = y
@@ -10,7 +10,6 @@ class Projectile
     @vitesse = vitesse
     defImg
     defHitbox
-    defVitesse
   end
 
 
@@ -19,7 +18,7 @@ class Projectile
   end
 
   def seDeplacer
-    if provenance == "allie"
+    if @provenance == "allie"
       @y = @y - @vitesse
     else
       @y = @y + @vitesse
@@ -38,20 +37,12 @@ class Projectile
   def defImg
     if @type == "mitraillette"
       if @provenance == "allie"
-        @image = Gosu::Image.new("../Ressources/ship_1_L.png")
+        @image = Gosu::Image.new("../Ressources/tire_vert.png")
       else
-        @image = Gosu::Image.new("../Ressources/ship_1_L.png")
+        @image = Gosu::Image.new("../Ressources/tire_vert.png")
       end
     else
-      @image = Gosu::Image.new("../Ressources/ship_1_L.png")
-    end
-  end
-
-  def defVitesse
-    if @type == "Tir"
-      @vitesse = 10
-    else
-      @vitesse = 5
+      @image = Gosu::Image.new("../Ressources/tire_violet.png")
     end
   end
 

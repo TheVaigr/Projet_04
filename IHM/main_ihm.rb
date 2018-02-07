@@ -123,6 +123,7 @@ class MainIHM < Gosu::Window
     postGame = 0
     if @frame > postGame && (@frame % 100 == 0)
       r = @r.rand(0...3)
+      puts r
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
       elsif r == 1
@@ -140,7 +141,7 @@ end
 
 
   def draw
-    @background_image.draw(0, 0, ZOrder::Background)
+    #@background_image.draw(0, 0, ZOrder::Background)
     for i in 0..@projectilesAllies.size-1
       @projectilesAllies[i].draw
     end

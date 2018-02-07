@@ -14,7 +14,7 @@ class MainIHM < Gosu::Window
 
   def initialize(width, height, difficulte, model)
     @DEBUT_JEU = 100
-    @FIN_JEU = 1000
+    @FIN_JEU = 10000
 
     super width, height
     self.caption = "Milky Way Light"
@@ -37,7 +37,6 @@ class MainIHM < Gosu::Window
 
     @font1 = Gosu::Font.new(35)
     @font2 = Gosu::Font.new(25)
-    @nom = "Marc"
     @score = 0
     @progression = 0
     @arme = "mitrailleuse"
@@ -138,7 +137,7 @@ class MainIHM < Gosu::Window
       elsif r == 1
         @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 2
-        @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        #@ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
       end
     end
 
@@ -174,7 +173,6 @@ end
     end
     if !@model.hero.estMort
       @model.hero.draw
-      else
     end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw

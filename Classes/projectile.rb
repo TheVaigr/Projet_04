@@ -39,11 +39,8 @@ class Projectile
     if @type == "mitraillette"
       if @provenance == "allie"
         @image = Gosu::Image.new("../Ressources/ship_1_L.png")
-        puts"proj allie"
       else
         @image = Gosu::Image.new("../Ressources/tire_violet.png")
-        puts"proj enn"
-
       end
     else
       @image = Gosu::Image.new("../Ressources/missil_1.png")
@@ -52,9 +49,9 @@ class Projectile
 
   def defVitesse
     if @type == "Tir"
-      @vitesse = 1
+      @vitesse = 10
     else
-      @vitesse = 0.5
+      @vitesse = 5
     end
   end
 

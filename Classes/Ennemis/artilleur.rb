@@ -2,7 +2,7 @@ require_relative 'ennemi'
 require_relative '../Armes/mitraillette'
 
 class Artilleur < Ennemi
-  attr_accessor :arme
+
   def initialize(image = Gosu::Image.new("../Ressources/enemie_2_fighter_N.png"),
                  degatCollision = 10,
                  degatTir = 100,

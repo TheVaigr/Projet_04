@@ -10,7 +10,7 @@ require_relative '../Classes/Ennemis/artilleur'
 
 class MainIHM < Gosu::Window
 
-  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height
+  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame
 
   def initialize(width, height, difficulte, model)
 
@@ -31,12 +31,12 @@ class MainIHM < Gosu::Window
     @song.volume = 0.0
     @song.play(true)
 
-    @nb = 0
-    @nb2 = 0
+    @frame = 0
   end
 
 ##################################################################################################
   def update
+    @frame = @frame + 1
 
     # déplacement du héro
     if (!Gosu::button_down?(Gosu::KbRight)) && (!Gosu::button_down?(Gosu::KbLeft))
@@ -99,23 +99,23 @@ class MainIHM < Gosu::Window
     end
 
     # Tir du héro
-    @nb++
-    #if ((@nb % @model.hero.arme.cadenceTir) == 0)
-      projectile = @model.hero.tire
-      @projectilesAllies.push(projectile)
-    #end
+
+    if ((@frame % @model.hero.arme.cadenceTir) == 0)
+      @projectilesAllies.push(@model.hero.tire)
+    end
 
     # Tir des ennemis
     for i in 0..@ennemis.size-1
-      if (nb % @ennemis[i].arme.cadenceTir) == 0 && @ennemis[i].is_a?(Artilleur)
-        @projectilesEnnemis.push(@ennemis[i].tire)
+      if @ennemis[i].arme != NIL
+        if (@frame % @ennemis[i].arme.cadenceTir) == 0
+          @projectilesEnnemis.push(@ennemis[i].tire)
+        end
       end
     end
 
     # Génération des ennemis aléatoire
-    @nb2++
-    postGame = 2000
-    if @nb2 > postGame && @nb2 % @difficulte * 200
+    postGame = 300
+    if @frame > postGame && @frame % @difficulte * 200
       r = rand(0...3)
       if r == 0
         @ennemis.push(Artilleur.new(random(@width*0.25...@width*0.75),0))
@@ -126,7 +126,6 @@ class MainIHM < Gosu::Window
       end
     end
 
-    # maj des niveaux de vie
 
     close if Gosu::button_down?(Gosu::KbEscape)
 

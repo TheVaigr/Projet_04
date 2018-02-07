@@ -13,7 +13,7 @@ class Bomber < Ennemi
                  x,
                  y)
     super
-
+    @arme = NIL
   end
 
   def seDeplacer(autoScroll, difficulte, hero)

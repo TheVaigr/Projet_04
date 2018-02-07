@@ -39,10 +39,10 @@ class Projectile
       if @provenance == "allie"
         @image = Gosu::Image.new("../Ressources/tire_vert.png")
       else
-        @image = Gosu::Image.new("../Ressources/tire_vert.png")
+        @image = Gosu::Image.new("../Ressources/tire_violet.png")
       end
     else
-      @image = Gosu::Image.new("../Ressources/tire_violet.png")
+      @image = Gosu::Image.new("../Ressources/missil_2.png")
     end
   end
 

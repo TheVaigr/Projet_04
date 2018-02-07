@@ -23,6 +23,8 @@ class Hero
     @image = Gosu::Image.new("../Ressources/ship_1_N.png")
     @hitbox = Hitbox.new(@x,@y,@image.width*1/3,@image.width*1/3)
     @r = Random.new
+
+    @i=0
   end
 
   def draw
@@ -77,15 +79,8 @@ class Hero
   end
 
   def changeArme
-    for i in @armes.size-1
-      if @armes[i] == @arme
-        if i == @armes.size-1
-          @arme = arme[0]
-        else
-          @arme = @armes
-        end
-      end
-    end
+    @i = @i + 1
+    @arme = @armes[@i % @armes.size]
   end
 
   def chargerArmes

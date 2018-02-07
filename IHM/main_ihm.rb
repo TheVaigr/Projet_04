@@ -132,6 +132,7 @@ class MainIHM < Gosu::Window
       end
     end
 
+    # Suppression des projectiles en dehors de la map
     for i in 0..@projectilesAllies.size-1
       if @projectilesAllies[i] != nil
         if @projectilesAllies[i].y < 0
@@ -168,7 +169,13 @@ end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw
     end
+  end
 
+  def button_up(id)
+    if id == Gosu::KbDown
+      puts "je passe"
+      @model.hero.changeArme
+    end
   end
 
 end

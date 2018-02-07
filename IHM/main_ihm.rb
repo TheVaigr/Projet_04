@@ -33,6 +33,7 @@ class MainIHM < Gosu::Window
     @song.play(true)
 
     @frame = 0
+    @r = Random.new
   end
 
 ##################################################################################################
@@ -100,7 +101,6 @@ class MainIHM < Gosu::Window
     end
 
     # Tir du héro
-
     if ((@frame % 3) == 0) #@model.hero.arme.cadenceTir
       @projectilesAllies.push(@model.hero.tire)
     end
@@ -117,7 +117,7 @@ class MainIHM < Gosu::Window
     # Génération des ennemis aléatoire
     postGame = 300
     if @frame > postGame && @frame % (@difficulte * 200) == 0
-      r = @r.rand(0...3)
+      r = @r.rand(10...42)
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75),0))
       elsif r == 1

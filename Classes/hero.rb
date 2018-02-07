@@ -5,7 +5,7 @@ require_relative 'Armes/mitraillette'
 require_relative 'Armes/arme'
 
 class Hero
-  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y
+  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y, :image
 
   def initialize(pseudo, couleur, x, y)
     @pseudo = pseudo

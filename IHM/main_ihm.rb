@@ -173,7 +173,6 @@ end
 
   def button_up(id)
     if id == Gosu::KbDown
-      puts "je passe"
       @model.hero.changeArme
     end
   end

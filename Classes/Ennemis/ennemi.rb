@@ -16,7 +16,7 @@ attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vi
     @cadenceTir = cadenceTir
 
     @image = image
-
+    @song = Gosu::Song.new("../Ressources/music/SFX_enemydie.mp3")
     @hitbox = Hitbox.new(0,0,@image.width*1/3,@image.width*1/3)
   end
 
@@ -29,7 +29,10 @@ attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vi
   end
 
   def estMort
-    if @y > 1080 || vie < 1
+    if @y > 1080
+      return true
+    elsif vie < 1
+      @song.play
       return true
     end
     return false

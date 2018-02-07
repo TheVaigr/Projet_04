@@ -53,7 +53,7 @@ class MainIHM < Gosu::Window
 
     # Deplacement des ennemis, collisions avec hero, mort de l'ennemi si hors map
     for i in 0..@ennemis.size-1
-      if @ennemis[i] != NIL
+      if @ennemis[i] != nil
         @ennemis[i].seDeplacer(@vitesseAutoScroll,@difficulte, @model.hero)
         # Test collision entre ennemis et héro
         if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
@@ -83,7 +83,7 @@ class MainIHM < Gosu::Window
     # Test de collision entre ennemis et projectiles alliés
     for j in 0..@ennemis.size-1
       for i in 0..@projectilesAllies.size-1
-        if @ennemis[j] != NIL && @projectilesAllies[i] != NIL
+        if @ennemis[j] != nil && @projectilesAllies[i] != nil
           if @model.collision(@projectilesAllies[i].hitbox, @ennemis[j].hitbox)
             @ennemis[j].vie = @ennemis[j].vie - @projectilesAllies[i].degat
             @projectilesAllies.delete(@projectilesAllies[i])
@@ -97,7 +97,7 @@ class MainIHM < Gosu::Window
 
     # Test de collision entre hero et projectiles ennemis
     for i in 0..@projectilesEnnemis.size-1
-      if @projectilesEnnemis[i] != NIL
+      if @projectilesEnnemis[i] != nil
         if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
           @model.hero.vie = @model.hero.vie - @projectilesEnnemis[i].degat
           @projectilesEnnemis.delete(@projectilesEnnemis[i])
@@ -112,7 +112,7 @@ class MainIHM < Gosu::Window
 
     # Tir des ennemis
     for i in 0..@ennemis.size-1
-      if @ennemis[i].arme != NIL
+      if @ennemis[i].arme != nil
         if (@frame % 20) == 0
           @projectilesEnnemis.push(@ennemis[i].tire)
         end
@@ -133,14 +133,14 @@ class MainIHM < Gosu::Window
     end
 
     for i in 0..@projectilesAllies.size-1
-      if @projectilesAllies[i] != NIL
+      if @projectilesAllies[i] != nil
         if @projectilesAllies[i].y < 0
           @projectilesAllies.delete@projectilesAllies[i]
         end
       end
     end
     for i in 0..@projectilesEnnemis.size-1
-      if @projectilesEnnemis[i] != NIL
+      if @projectilesEnnemis[i] != nil
         if @projectilesEnnemis[i].y > @height
           @projectilesEnnemis.delete@projectilesEnnemis[i]
         end

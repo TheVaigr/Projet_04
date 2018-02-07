@@ -26,9 +26,9 @@ class Artilleur < Ennemi
 
     if @direction == "gauche"
 
-      @x -= difficulte*5
+      @x -= difficulte*3
     else
-      @x += difficulte*5
+      @x += difficulte*3
     end
 
     @y += autoScroll

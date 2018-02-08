@@ -8,12 +8,14 @@ require_relative '../Classes/Ennemis/bomber'
 require_relative '../Classes/Ennemis/gardien'
 require_relative '../Classes/Ennemis/ennemi'
 require_relative '../Classes/Ennemis/artilleur'
+require_relative '../Classes/Bonus/bonus'
+require_relative '../Classes/Bonus/heal'
 
 class MVC < Gosu::Window
 
   attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame, :bonus ,:couleur
   def initialize(width, height, model)
-    super width, height
+    super #width, height
     @DEBUT_JEU = 100
     @FIN_JEU = 10000
 
@@ -218,9 +220,11 @@ class MVC < Gosu::Window
         @bonus[i].draw
       end
     end
-    for i in 0..@projectilesAllies.size-1
-      if @projectilesAllies[i] != nil
-        @projectilesAllies[i].draw
+    if !@model.hero.estMort
+      for i in 0..@projectilesAllies.size-1
+        if @projectilesAllies[i] != nil
+          @projectilesAllies[i].draw
+        end
       end
     end
     for i in 0..@projectilesEnnemis.size-1
@@ -230,6 +234,11 @@ class MVC < Gosu::Window
     end
     if !@model.hero.estMort
       @model.hero.draw
+    else
+      @x += 2
+      if @x % 300 == 0
+        @context = :classement
+      end
     end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw
@@ -464,8 +473,8 @@ class MVC < Gosu::Window
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         if @model.collision(@bonus[i].hitbox, @model.hero.hitbox)
-          @bonus.delete(@bonus[i])
           @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          @bonus.delete(@bonus[i])
           if @model.hero.vie >= @model.hero.vieMax
             @model.hero.vie = @model.hero.vieMax
           end
@@ -503,16 +512,16 @@ class MVC < Gosu::Window
       elsif r == 1
         @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 2
-        for i in 0..@r.rand(0...3)
-          @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        for i in 0..@r.rand(0...2)
+          @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-300),0))
         end
       end
     end
 
     # Génération des bonus
-    #if @r.rand(0...120) == 1
-      #@bonus.push(Heal.new(@width/2,0))
-    #end
+    if @r.rand(0...1000+300*1.2) == 1
+      @bonus.push(Heal.new(@width/2,0))
+    end
 
     # Suppression des projectiles en dehors de la map
     for i in 0..@projectilesAllies.size-1
@@ -524,7 +533,7 @@ class MVC < Gosu::Window
     end
     for i in 0..@projectilesEnnemis.size-1
       if @projectilesEnnemis[i] != nil
-        if @projectilesEnnemis[i].y > @height
+        if @projectilesEnnemis[i].y > @height || @projectilesEnnemis[i].x < 0.25*width ||  @projectilesEnnemis[i].x > 0.75*width
           @projectilesEnnemis.delete@projectilesEnnemis[i]
         end
       end
@@ -597,6 +606,7 @@ class MVC < Gosu::Window
       elsif @pos_x < 605 && @pos_x > 360 && @pos_y < 1030 && @pos_y > 930
         @context = :acceuil
       elsif @pos_x < 1550 && @pos_x > 1330 && @pos_y < 1030 && @pos_y > 930
+        @x = 0
         @context = :jeu
       end
     end
@@ -656,7 +666,7 @@ class MVC < Gosu::Window
     elsif id == Gosu::KbSpace
       @model.hero.pseudo += " "
     elsif id == Gosu::KbBackspace
-      @model.hero.pseudo -= @model.hero.pseudo[0...-1]
+      @model.hero.pseudo = @model.hero.pseudo[0...-1]
     end
   end
 

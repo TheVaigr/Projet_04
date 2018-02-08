@@ -1,5 +1,12 @@
 require 'gosu'
 
-require_relative '../Controller/controller'
+require_relative '../Classes/MVC'
+require_relative '../Model/Model'
 
-Controller = Controller.new()
+WindowWidth = 1920
+WindowHeight = 1080
+
+@model = Model.new(WindowWidth, WindowHeight)
+@MVC = MVC.new(WindowWidth,WindowHeight, @model)
+
+@MVC.show

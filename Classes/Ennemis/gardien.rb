@@ -33,4 +33,7 @@ class Gardien < Ennemi
     @y += @vitesseDeplacement*difficulte
   end
 
+
+
+
 end

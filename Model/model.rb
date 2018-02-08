@@ -9,7 +9,7 @@ class Model
 
   attr_accessor :hero, :niveauDifficulte, :meilleursJoueursScore, :meilleursJoueursPseudo
 
-  def initialize(couleur, width, height)
+  def initialize(width, height)
     couleur = "vert"
     @hero = Hero.new("", couleur, width/2, height-150)
     initTableaux

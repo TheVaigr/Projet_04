@@ -33,6 +33,8 @@ class Test < Gosu::Window
     @progression = 0
     @arme = "mitrailleuse"
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
+    @contours_R = Gosu::Image.new("../ressources/side_Rpng")
+    @contours_L = Gosu::Image.new("../ressources/side_L.png")
 
     #-------------------------------------------------------
 
@@ -94,6 +96,8 @@ class Test < Gosu::Window
 
     @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
+    @contours_L.draw(480,0,1)
+    @contours_R.draw(1440,0,1)
 
     @font1.draw(@nom, 240-@font1.text_width(@nom)/2, 100, 2)
     @font1.draw("LVL : ", 240-@font1.text_width("LVL : ")/2, 200, 2)
@@ -105,6 +109,7 @@ class Test < Gosu::Window
     @font1.draw(@score, 240+@font1.text_width("Score : ")/2, 400, 2)
     @font1.draw("armes", 240-@font1.text_width("armes")/2, 500, 2)
     @font1.draw("bonus", 240-@font1.text_width("bonus")/2, 600, 2)
+
 
 
     #-------------------------------------------------------

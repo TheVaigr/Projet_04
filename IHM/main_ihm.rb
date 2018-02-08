@@ -12,12 +12,13 @@ class MainIHM < Gosu::Window
 
   attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame
 
-
   def initialize(width, height, difficulte, model)
+    @DEBUT_JEU = 100
+    @FIN_JEU = 10000
 
     super width, height
     self.caption = "Milky Way Light"
-    @background_image = Gosu::Image.new("../Ressources/ecrant_acceuil.png")
+
     @model = model
     @difficulte = difficulte
     @vitesseAutoScroll = @difficulte * 4
@@ -26,7 +27,6 @@ class MainIHM < Gosu::Window
     @projectilesEnnemis = []
     @width = width
     @height = height
-
 
     @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
     @song.volume = 0.0
@@ -37,19 +37,73 @@ class MainIHM < Gosu::Window
 
     @font1 = Gosu::Font.new(35)
     @font2 = Gosu::Font.new(25)
-    @nom = "Marc"
-    @lvl = 0
     @score = 0
     @progression = 0
-    @arme = "mitrailleuse"
+    @background1 = 0
+    @background_image = Gosu::Image.new("../Ressources/background.png")
+    @background2 = -1080
+    #@arme = "mitrailleuse"
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
-    @DEBUT_JEU = 200
-    @FIN_JEU
+
+
+    # Init tableaux des scores
+    @meilleursJoueursScore = [[],[],[]]
+    for i in 1..3
+      @meilleursJoueursScore.push([])
+      for j in 0..3
+        @meilleursJoueursScore[i][j]=0
+      end
+    end
+    @meilleursJoueursPseudo = [[],[],[]]
+    for i in 1..3
+      @meilleursJoueursPseudo.push([])
+      for j in 0..3
+        @meilleursJoueursPseudo[i][j]=""
+      end
+    end
+
+    # avant fermeture
+    trie = false
+    for i in 1..3
+      if @difficulte == i
+        for j in 0..3
+          if trie == false && @model.hero.score > @meilleursJoueursScore[i][j]
+            tempPseudo = @meilleursJoueursPseudo[i][j]
+            tempScore = @meilleursJoueursScore[i][j]
+            @meilleursJoueursPseudo[i][j] = @model.hero.pseudo
+            @meilleursJoueursScore[i][j] = @model.hero.score
+            trie = true
+          elsif trie == true
+            tempPseudo2 = @meilleursJoueursPseudo[i][j]
+            tempScore2 = @meilleursJoueursScore[i][j]
+            @meilleursJoueursScore[i][j] = tempScore
+            @meilleursJoueursPseudo[i][j] = tempPseudo
+            tempPseudo = tempPseudo2
+            tempScore = tempScore2
+          end
+        end
+      end
+    end
+
+
+
   end
 
 ##################################################################################################
   def update
     @frame = @frame + 1
+    if @progression < 100
+      @progression = (@frame*100)/@FIN_JEU
+    end
+
+    @background1 += 3
+    @background2 += 3
+    if @background1 == 1080
+      @background1 = 0
+    end
+    if @background2 == 0
+      @background2 = -1080
+    end
 
     # déplacement du héro
     if (!Gosu::button_down?(Gosu::KbRight)) && (!Gosu::button_down?(Gosu::KbLeft))
@@ -64,13 +118,12 @@ class MainIHM < Gosu::Window
     # Deplacement des ennemis, collisions avec hero, mort de l'ennemi si hors map
     for i in 0..@ennemis.size-1
       if @ennemis[i] != nil
-        @ennemis[i].seDeplacer(@vitesseAutoScroll,@difficulte, @model.hero)
+        @ennemis[i].seDeplacer(@difficulte)
         # Test collision entre ennemis et héro
         if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
           @model.hero.vie -= @ennemis[i].degatCollision
           @ennemis.delete(@ennemis[i])
-          # Test si ennemi est sous l'ihm
-        elsif @ennemis[i].estMort
+        elsif @ennemis[i].estDehors
           @ennemis.delete(@ennemis[i])
         end
       end
@@ -82,12 +135,16 @@ class MainIHM < Gosu::Window
       @ennemis[i].majHitbox
     end
     for i in 0..@projectilesAllies.size-1
-      @projectilesAllies[i].seDeplacer
-      @projectilesAllies[i].majHitbox
+      if @projectilesAllies[i] != nil
+        @projectilesAllies[i].seDeplacer
+        @projectilesAllies[i].majHitbox
+      end
     end
     for i in 0..@projectilesEnnemis.size-1
-      @projectilesEnnemis[i].seDeplacer
-      @projectilesEnnemis[i].majHitbox
+      if @projectilesEnnemis[i] != nil
+        @projectilesEnnemis[i].seDeplacer
+        @projectilesEnnemis[i].majHitbox
+      end
     end
 
     # Test de collision entre ennemis et projectiles alliés
@@ -98,6 +155,7 @@ class MainIHM < Gosu::Window
             @ennemis[j].vie = @ennemis[j].vie - @projectilesAllies[i].degat
             @projectilesAllies.delete(@projectilesAllies[i])
             if @ennemis[j].estMort
+              @model.hero.score = @model.hero.score + 5
               @ennemis.delete_at(j)
             end
           end
@@ -116,29 +174,38 @@ class MainIHM < Gosu::Window
     end
 
     # Tir du héro
-    if ((@frame % 20) == 0) #@model.hero.arme.cadenceTir
-      @projectilesAllies.push(@model.hero.tire)
+    if ((@frame % @model.hero.arme.cadenceTir) == 0)
+      projectiles = @model.hero.tire
+      for i in 0..projectiles.size
+        @projectilesAllies.push(projectiles[i])
+      end
+
     end
 
     # Tir des ennemis
     for i in 0..@ennemis.size-1
       if @ennemis[i].arme != nil
-        if (@frame % 20) == 0
-          @projectilesEnnemis.push(@ennemis[i].tire)
+        if (@frame.to_f % @model.getCadenceTirArtilleur.to_f) == 0.0
+          projectiles = @ennemis[i].tire(@model.hero.x)
+          for i in 0..projectiles.size
+            @projectilesEnnemis.push(projectiles[i])
+          end
         end
       end
     end
 
     # Génération des ennemis aléatoire
     postGame = 0
-    if @frame > @DEBUT_JEU && (@frame % 100 == 0)
+    if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+20) == 0.0) && @frame < @FIN_JEU
       r = @r.rand(0...3)
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 1
         @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 2
-        @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        for i in 0..@r.rand(0...3)
+          @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        end
       end
     end
 
@@ -158,9 +225,6 @@ class MainIHM < Gosu::Window
       end
     end
 
-
-    @lvl += 1
-
     close if Gosu::button_down?(Gosu::KbEscape)
 
 end
@@ -168,16 +232,20 @@ end
 
 
   def draw
-    #@background_image.draw(0, 0, ZOrder::Background)
+    background_image.draw(480,@background1,-1)
+    background_image.draw(480,@background2,-1)
     for i in 0..@projectilesAllies.size-1
+      if @projectilesAllies[i] != nil
       @projectilesAllies[i].draw
+      end
     end
     for i in 0..@projectilesEnnemis.size-1
-      @projectilesEnnemis[i].draw
+      if @projectilesEnnemis[i] != nil
+        @projectilesEnnemis[i].draw
+      end
     end
     if !@model.hero.estMort
       @model.hero.draw
-      else
     end
     for i in 0..(@ennemis.size-1)
       @ennemis[i].draw
@@ -186,17 +254,17 @@ end
     @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
 
-    @font1.draw(@nom, 240-@font1.text_width(@nom)/2, 100, 2)
-    @font1.draw("LVL : ", 240-@font1.text_width("LVL : ")/2, 200, 2)
-    @font1.draw(@lvl/1000, 240+@font1.text_width("LVL : ")/2, 200, 2)
-    @font1.draw("Progression : ", 240-@font1.text_width("Progression :  ")/2, 300, 2)
-    @font1.draw(@progression/10, 240+@font1.text_width("Progression :  ")/2, 300, 2)
-    @font1.draw("%", 260+@font1.text_width("Progression : 100")/2, 300, 2)
-    @font1.draw("Score : ", 240-@font1.text_width("Score : ")/2, 400, 2)
-    @font1.draw(@score, 240+@font1.text_width("Score : ")/2, 400, 2)
-    @font1.draw("armes", 240-@font1.text_width("armes")/2, 500, 2)
-    @font1.draw("bonus", 240-@font1.text_width("bonus")/2, 600, 2)
 
+
+    @font1.draw(@model.hero.pseudo, 240-@font1.text_width(@model.hero.pseudo)/2, 100, 2)
+    @font1.draw("Niveau :", 100, 200, 2)
+    @font1.draw(@difficulte/1000, 300, 200, 2)
+    @font1.draw("Avancée :", 100, 300, 2)
+    @font1.draw(@progression, 300, 300, 2)
+    @font1.draw("%", 355, 300, 2)
+    @font1.draw("Score :", 100, 400, 2)
+    @font1.draw(@model.hero.score, 300, 400, 2)
+    @font1.draw("Armes", 100, 500, 2)
   end
 
   def button_up(id)

@@ -1,15 +1,17 @@
 class Projectile
   attr_accessor :y, :x, :type, :degat, :provenance, :hitbox, :vitesse, :image
 
-  def initialize(vitesse, type, provenance, degat, x, y)
+  def initialize(vitesse, type, provenance, degat, x, y, xb)
     @type = type
-    @x = x
     @y = y
     @degat = degat
     @provenance = provenance
     @vitesse = vitesse
     defImg
+    @x = x - @image.width/2
     defHitbox
+    @distanceX = xb - x
+    @xb =xb
   end
 
 
@@ -20,8 +22,9 @@ class Projectile
   def seDeplacer
     if @provenance == "allie"
       @y = @y - @vitesse
-    else
+    elsif @type = "mitrailette" && @provenance == "ennemi"
       @y = @y + @vitesse
+      @x = @x + @distanceX/99
     end
   end
 

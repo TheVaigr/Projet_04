@@ -3,10 +3,10 @@ class Acceuil < Gosu::Window
   def initialize(width, height)
     super
     self.caption = "Acceuil"
-    @background_image = Gosu::Image.new("../ressources/test.jpg")
+    #@background_image = Gosu::Image.new("../ressources/test.jpg")
     @test1 = Gosu::Image.new("../ressources/ship_1_L.png")
-    @font1 = Gosu::Font.new(70)
-    @font2 = Gosu::Font.new(40)
+    @font1 = Gosu::Font.new(100)
+    @font2 = Gosu::Font.new(60)
     @pos_1 = (width-@font1.text_width("Milky Way Light")) / 2 # Titre
     @pos_2 = (width-@font2.text_width("Jouer")) / 2 # Bouton pour jouer
     @pos_3 = (width-@font2.text_width("Classement")) / 2 # Bouton du classement
@@ -16,30 +16,30 @@ class Acceuil < Gosu::Window
     @pos_y = mouse_y # Position horizontal de la sourie
     @x = 0
     @y = 0
-    @i = 0
+    @rotation = 0
     @color = Gosu::Color.new(100, 255, 255, 255)
     @curseur == "rien"
   end
 
   def draw
-    @background_image.draw(0, 0, 0)
+    #@background_image.draw(0, 0, 0)
       # Dessin des boutton
-    @font1.draw("Milky Way Light", @pos_1, 70, 1)
-    @font2.draw("Jouer", @pos_2, 200, 1)
-    @font2.draw("Classement", @pos_3, 300, 1)
-    @font2.draw("Règles", @pos_4, 400, 1)
-    @font2.draw("Quitter", @pos_5, 500, 1)
+    @font1.draw("Milky Way Light", @pos_1, 50, 1)
+    @font2.draw("Jouer", @pos_2, 250, 1)
+    @font2.draw("Classement", @pos_3, 450, 1)
+    @font2.draw("Règles", @pos_4, 650, 1)
+    @font2.draw("Quitter", @pos_5, 850, 1)
 
-    @test1.draw_rot(@x, @y, 1, @i, 0.5,0.5, 1, 1, 0xff_ffffff, :default)
+    @test1.draw_rot(@x, @y, 1, @rotation, 0.5,0.5, 1, 1, 0xff_ffffff, :default)
 
     if @curseur == "jouer"
-      @carre = Gosu::draw_rect(440, 185, 145, 70, @color)
+      @carre = Gosu::draw_rect(850, 230, 220, 100, @color)
     elsif @curseur == "classement"
-      @carre = Gosu::draw_rect(390, 285, 245, 70, @color)
+      @carre = Gosu::draw_rect(780, 430, 360, 100, @color)
     elsif @curseur == "regles"
-      @carre = Gosu::draw_rect(435, 385, 150, 70, @color)
+      @carre = Gosu::draw_rect(840, 630, 240, 100, @color)
     elsif @curseur == "quitter"
-      @carre = Gosu::draw_rect(435, 485, 150, 70, @color)
+      @carre = Gosu::draw_rect(840, 830, 240, 100, @color)
     end
   end
 
@@ -50,13 +50,13 @@ class Acceuil < Gosu::Window
   # Détection de la localisation de la sourie
   def button_up(id)
     if id == Gosu::MS_LEFT
-      if @pos_x < 585 && @pos_x > 440 && @pos_y < 255 && @pos_y > 185
+      if @pos_x < 1070 && @pos_x > 850 && @pos_y < 330 && @pos_y > 230
         puts "Jouer"
-      elsif @pos_x < 635 && @pos_x > 390 && @pos_y < 355 && @pos_y > 285
+      elsif @pos_x < 1140 && @pos_x > 780 && @pos_y < 530 && @pos_y > 430
         puts "Classement"
-      elsif @pos_x < 585 && @pos_x > 435 && @pos_y < 455 && @pos_y > 385
+      elsif @pos_x < 1080 && @pos_x > 840 && @pos_y < 730 && @pos_y > 630
         puts "Regles"
-      elsif @pos_x < 585 && @pos_x > 435 && @pos_y < 555 && @pos_y > 485
+      elsif @pos_x < 1080 && @pos_x > 840 && @pos_y < 930 && @pos_y > 830
         puts "Quitter"
       end
     end
@@ -68,13 +68,13 @@ class Acceuil < Gosu::Window
     @x += 1
     @y += 1
     @i += 4
-    if @pos_x < 585 && @pos_x > 440 && @pos_y < 255 && @pos_y > 185
+    if @pos_x < 1070 && @pos_x > 850 && @pos_y < 330 && @pos_y > 230
       @curseur = "jouer"
-    elsif @pos_x < 635 && @pos_x > 390 && @pos_y < 355 && @pos_y > 285
+    elsif @pos_x < 1140 && @pos_x > 780 && @pos_y < 530 && @pos_y > 430
       @curseur = "classement"
-    elsif @pos_x < 585 && @pos_x > 435 && @pos_y < 455 && @pos_y > 385
+    elsif @pos_x < 1080 && @pos_x > 840 && @pos_y < 730 && @pos_y > 630
       @curseur = "regles"
-    elsif @pos_x < 585 && @pos_x > 435 && @pos_y < 555 && @pos_y > 485
+    elsif @pos_x < 1080 && @pos_x > 840 && @pos_y < 930 && @pos_y > 830
       @curseur = "quitter"
     else
       @curseur = "rien"

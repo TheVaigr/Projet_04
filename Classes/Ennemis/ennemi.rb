@@ -2,7 +2,7 @@ require_relative '../hitbox'
 
 class Ennemi
 
-attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vitesseTir, :cadenceTir, :hitbox,:x, :y, :hero, :arme
+attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vitesseTir, :cadenceTir, :hitbox,:x, :y, :hero, :arme, :vieMax
 
   def initialize(image, degatCollision, degatTir, vie, vitesseDeplacement, vitesseTir, cadenceTir, x, y)
     @x = x
@@ -11,6 +11,7 @@ attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vi
     @degatCollision = degatCollision
     @degatTir = degatTir
     @vie = vie
+    @vieMax = vie
     @vitesseDeplacement = vitesseDeplacement
     @vitesseTir = vitesseTir
     @cadenceTir = cadenceTir
@@ -22,16 +23,26 @@ attr_accessor :image, :degatCollision, :degatTir, :vie, :vitesseDeplacement, :vi
 
   def draw
     @image.draw(@x, @y, ZOrder::Ennemis)
-    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y, Gosu::Color.new(0xff_00ff00))
-    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1, Gosu::Color.new(0xff_00ff00), (@x+@image.width/2)+((-50+@vie)/50)*20, @y+1, Gosu::Color.new(0xff_00ff00))
-    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@vie)/50)*20 , @y, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y, Gosu::Color.new(0xff_ff0000))
-    @ligne = Gosu::draw_line((@x+@image.width/2)+((-50+@vie)/50)*20 , @y+1, Gosu::Color.new(0xff_ff0000), (@x+@image.width/2)+20, @y+1, Gosu::Color.new(0xff_ff0000))
+    # barre de point de vie
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y, Gosu::Color.new(0xff_00ff00),                      (@x+@image.width/2)-20+(@vie/@vieMax.to_f)*40, @y, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20+(@vie/@vieMax.to_f)*40 , @y, Gosu::Color.new(0xff_ff0000),     (@x+@image.width/2)+20, @y, Gosu::Color.new(0xff_ff0000))
+
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+1, Gosu::Color.new(0xff_00ff00),                    (@x+@image.width/2)-20+(@vie/@vieMax.to_f)*40, @y+1, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20+(@vie/@vieMax.to_f)*40 , @y+1, Gosu::Color.new(0xff_ff0000),   (@x+@image.width/2)+20, @y+1, Gosu::Color.new(0xff_ff0000))
+
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20, @y+2, Gosu::Color.new(0xff_00ff00),                    (@x+@image.width/2)-20+(@vie/@vieMax.to_f)*40, @y+2, Gosu::Color.new(0xff_00ff00))
+    @ligne = Gosu::draw_line((@x+@image.width/2)-20+(@vie/@vieMax.to_f)*40 , @y+2, Gosu::Color.new(0xff_ff0000),   (@x+@image.width/2)+20, @y+2, Gosu::Color.new(0xff_ff0000))
+  end
+
+  def estDehors
+    if @y > 1080
+      return true
+    end
+    return false
   end
 
   def estMort
-    if @y > 1080
-      return true
-    elsif vie < 1
+    if @vie < 1
       @song.play
       return true
     end

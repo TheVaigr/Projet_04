@@ -22,4 +22,9 @@ class Model
     end
   end
 
+  def getCadenceTirArtilleur
+    @artilleur = Artilleur.new(0,0)
+    return @artilleur.cadenceTir
+  end
+
 end

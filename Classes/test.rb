@@ -18,14 +18,13 @@ WindowHeight = 1080
 #@Choix1 = Choix_lvl.new(WindowWidth, WindowHeight)
 #@Choix1.show
 
-#@pseudo = "bla"
-#@couleur = 1
-#@model = Model.new(@pseudo, @couleur, WindowWidth, WindowHeight)
+@couleur = 1
+@model = Model.new(@couleur, WindowWidth, WindowHeight)
 #@Test = Test.new(WindowWidth, WindowHeight, @model)
 #@Test.show
 
 #@Classement = Classement.new(WindowWidth, WindowHeight)
 #@Classement.show
 
-@MVC = MVC.new(WindowWidth,WindowHeight)
+@MVC = MVC.new(WindowWidth,WindowHeight, @model)
 @MVC.show

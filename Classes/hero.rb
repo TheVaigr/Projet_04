@@ -83,7 +83,15 @@ class Hero
   end
 
   def tire
-    return Projectile.new(@arme.vitesseTir, @arme.type, "allie", @arme.degat, @x+ @image.width/2, @y + @image.height/3)
+    projectiles = []
+    if @arme.type == "mitraillette"
+      projectiles.push(Projectile.new(@arme.vitesseTir, @arme.type, "allie", @arme.degat, @x+ @image.width/2+12, @y + @image.height/3,0))
+      projectiles.push(Projectile.new(@arme.vitesseTir, @arme.type, "allie", @arme.degat, @x+ @image.width/2, @y + @image.height/3-5,0))
+      projectiles.push(Projectile.new(@arme.vitesseTir, @arme.type, "allie", @arme.degat, @x+ @image.width/2-12, @y + @image.height/3,0))
+    else
+      projectiles.push(Projectile.new(@arme.vitesseTir, @arme.type, "allie", @arme.degat, @x+ @image.width/2, @y + @image.height/3,0))
+    end
+    return projectiles
   end
 
   def changeArme

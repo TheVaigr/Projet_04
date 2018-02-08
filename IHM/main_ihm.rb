@@ -40,10 +40,53 @@ class MainIHM < Gosu::Window
     @score = 0
     @progression = 0
     @background1 = 0
-    @background_image = Gosu::Image.new("../ressources/background.png")
+    @background_image = Gosu::Image.new("../Ressources/background.png")
     @background2 = -1080
     #@arme = "mitrailleuse"
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
+
+
+    # Init tableaux des scores
+    @meilleursJoueursScore = [[],[],[]]
+    for i in 1..3
+      @meilleursJoueursScore.push([])
+      for j in 0..3
+        @meilleursJoueursScore[i][j]=0
+      end
+    end
+    @meilleursJoueursPseudo = [[],[],[]]
+    for i in 1..3
+      @meilleursJoueursPseudo.push([])
+      for j in 0..3
+        @meilleursJoueursPseudo[i][j]=""
+      end
+    end
+
+    # avant fermeture
+    trie = false
+    for i in 1..3
+      if @difficulte == i
+        for j in 0..3
+          if trie == false && @model.hero.score > @meilleursJoueursScore[i][j]
+            tempPseudo = @meilleursJoueursPseudo[i][j]
+            tempScore = @meilleursJoueursScore[i][j]
+            @meilleursJoueursPseudo[i][j] = @model.hero.pseudo
+            @meilleursJoueursScore[i][j] = @model.hero.score
+            trie = true
+          elsif trie == true
+            tempPseudo2 = @meilleursJoueursPseudo[i][j]
+            tempScore2 = @meilleursJoueursScore[i][j]
+            @meilleursJoueursScore[i][j] = tempScore
+            @meilleursJoueursPseudo[i][j] = tempPseudo
+            tempPseudo = tempPseudo2
+            tempScore = tempScore2
+          end
+        end
+      end
+    end
+
+
+
   end
 
 ##################################################################################################
@@ -92,12 +135,16 @@ class MainIHM < Gosu::Window
       @ennemis[i].majHitbox
     end
     for i in 0..@projectilesAllies.size-1
-      @projectilesAllies[i].seDeplacer
-      @projectilesAllies[i].majHitbox
+      if @projectilesAllies[i] != nil
+        @projectilesAllies[i].seDeplacer
+        @projectilesAllies[i].majHitbox
+      end
     end
     for i in 0..@projectilesEnnemis.size-1
-      @projectilesEnnemis[i].seDeplacer
-      @projectilesEnnemis[i].majHitbox
+      if @projectilesEnnemis[i] != nil
+        @projectilesEnnemis[i].seDeplacer
+        @projectilesEnnemis[i].majHitbox
+      end
     end
 
     # Test de collision entre ennemis et projectiles alliés
@@ -127,15 +174,22 @@ class MainIHM < Gosu::Window
     end
 
     # Tir du héro
-    if ((@frame % @model.hero.arme.cadenceTir) == 0) #@model.hero.arme.cadenceTir
-      @projectilesAllies.push(@model.hero.tire)
+    if ((@frame % @model.hero.arme.cadenceTir) == 0)
+      projectiles = @model.hero.tire
+      for i in 0..projectiles.size
+        @projectilesAllies.push(projectiles[i])
+      end
+
     end
 
     # Tir des ennemis
     for i in 0..@ennemis.size-1
       if @ennemis[i].arme != nil
         if (@frame.to_f % @model.getCadenceTirArtilleur.to_f) == 0.0
-          @projectilesEnnemis.push(@ennemis[i].tire)
+          projectiles = @ennemis[i].tire(@model.hero.x)
+          for i in 0..projectiles.size
+            @projectilesEnnemis.push(projectiles[i])
+          end
         end
       end
     end
@@ -181,10 +235,14 @@ end
     background_image.draw(480,@background1,-1)
     background_image.draw(480,@background2,-1)
     for i in 0..@projectilesAllies.size-1
+      if @projectilesAllies[i] != nil
       @projectilesAllies[i].draw
+      end
     end
     for i in 0..@projectilesEnnemis.size-1
-      @projectilesEnnemis[i].draw
+      if @projectilesEnnemis[i] != nil
+        @projectilesEnnemis[i].draw
+      end
     end
     if !@model.hero.estMort
       @model.hero.draw

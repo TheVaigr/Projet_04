@@ -7,9 +7,9 @@ class Artilleur < Ennemi
                  degatCollision = 10,
                  degatTir = 20,
                  vie = 100,
-                 vitesseDeplacement = 100,
-                 vitesseTir = 3,
-                 cadenceTir = 60,
+                 vitesseDeplacement = 3,
+                 vitesseTir = 5,
+                 cadenceTir = 100,
                  x,
                  y)
     super
@@ -17,10 +17,12 @@ class Artilleur < Ennemi
   end
 
   def seDeplacer(difficulte)
-    @y += 1.5
+    @y += @vitesseDeplacement
   end
 
-  def tire
-    return Projectile.new(@vitesseTir,"mitraillette", "ennemi",@degatTir, @x + @image.width/2, @y + @image.height*0.7)
+  def tire(xb)
+    projectiles = []
+    projectiles.push(Projectile.new(@vitesseTir,"mitraillette", "ennemi",@degatTir, @x + @image.width/2, @y + @image.height*0.7, xb))
+    return projectiles
   end
 end

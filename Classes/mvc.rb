@@ -250,6 +250,17 @@ class MVC < Gosu::Window
     @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
 
 
+    x = 0
+    y = 600
+    for i in 0..@model.hero.armes.size-1
+      if @model.hero.armes[i] == @model.hero.arme
+
+      end
+        image = Gosu::Image.new("../Ressources/weapons_"+i.to_s+".png")
+        image.draw(x, y, ZOrder::Hero)
+        x += 40
+    end
+
 
     @font5.draw(@model.hero.pseudo, 240-@font1.text_width(@model.hero.pseudo)/2, 100, 2)
     @font5.draw("Niveau :", 100, 200, 2)

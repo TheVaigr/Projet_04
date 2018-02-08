@@ -6,7 +6,7 @@ require_relative 'Armes/arme'
 require_relative 'Armes/missile'
 
 class Hero
-  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y, :image, :vieMax, :couleur
+  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y, :image, :vieMax, :couleur, :burst
 
   def initialize(pseudo, couleur, x, y)
     @pseudo = pseudo
@@ -25,7 +25,7 @@ class Hero
     @image = Gosu::Image.new("../Ressources/ship_1_N.png")
     @hitbox = Hitbox.new(@x,@y,@image.width*1/3,@image.width*1/3)
     @r = Random.new
-
+    @burst = false
     @i=0
   end
 

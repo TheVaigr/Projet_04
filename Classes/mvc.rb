@@ -10,6 +10,7 @@ require_relative '../Classes/Ennemis/ennemi'
 require_relative '../Classes/Ennemis/artilleur'
 require_relative '../Classes/Bonus/bonus'
 require_relative '../Classes/Bonus/heal'
+require_relative '../Classes/Bonus/degat'
 
 class MVC < Gosu::Window
 
@@ -28,6 +29,7 @@ class MVC < Gosu::Window
     @background_image = Gosu::Image.new("../Ressources/background.png")
 
     @color = Gosu::Color.new(100, 255, 255, 255)
+    @color2 = Gosu::Color.new(100, 128, 0, 0)
     @font1 = Gosu::Font.new(100)
     @font2 = Gosu::Font.new(60)
     @font3 = Gosu::Font.new(40)
@@ -62,9 +64,11 @@ class MVC < Gosu::Window
     @height = height
 
     @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
-    @song.volume = 0.0
+    @song.volume = 0.3
     @song.play(true)
 
+    @nimp = 0
+    @nimp2 = 0
     @frame = 0
     @r = Random.new
 
@@ -231,13 +235,11 @@ class MVC < Gosu::Window
     end
     if !@model.hero.estMort
       @model.hero.draw
-      @x += 1
     else
       @x += 1
-      color = Gosu::Color.new(100, 128, 0, 0)
-      @carre = Gosu::draw_rect(0, 0, @width, @height, color)
+      @carre = Gosu::draw_rect(0, 0, @width, @height, @color2)
       @font1.draw("GAME OVER", @width/2 - @font1.text_width("GAME OVER")/2, @height/2, ZOrder::Hero)
-      if @x % 500 == 0
+      if @x % 400 == 0
         @model.remplirTableaux(@difficulte)
         resetPartie
         @context = :classement
@@ -250,17 +252,17 @@ class MVC < Gosu::Window
     @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
 
-    x = 150
+    x = 60
     y = 600
     for i in 0..@model.hero.armes.size-1
         image = Gosu::Image.new("../Ressources/weapons_"+(i+1).to_s+".png")
         image.draw(x, y, ZOrder::Hero)
         if @model.hero.armes[i] == @model.hero.arme
-          @ligne = Gosu::draw_line(x, y+image.height*1.2, Gosu::Color.new(0xff_ff0000), x+image.width, y+image.height*1.2, Gosu::Color.new(0xff_ff0000))
-          @ligne = Gosu::draw_line(x, y+image.height*1.2+1, Gosu::Color.new(0xff_ff0000), x+image.width, y+image.height*1.2+1, Gosu::Color.new(0xff_ff0000))
+          @ligne = Gosu::draw_line(x, y+image.height*1.2, Gosu::Color.new(0xff_33cc33), x+image.width, y+image.height*1.2, Gosu::Color.new(0xff_33cc33))
+          @ligne = Gosu::draw_line(x, y+image.height*1.2+1, Gosu::Color.new(0xff_ffcc00), x+image.width, y+image.height*1.2+1, Gosu::Color.new(0xff_ffcc00))
           @ligne = Gosu::draw_line(x, y+image.height*1.2+2, Gosu::Color.new(0xff_ff0000), x+image.width, y+image.height*1.2+2, Gosu::Color.new(0xff_ff0000))
         end
-        x += 100
+        x += 130
     end
 
 
@@ -429,6 +431,9 @@ class MVC < Gosu::Window
         if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
           @model.hero.vie -= @ennemis[i].degatCollision
           @ennemis.delete(@ennemis[i])
+          if !@model.hero.estMort
+            Gosu::Song.new("../Ressources/music/SFX_rocketlauch.mp3").play
+          end
         elsif @ennemis[i].estDehors
           @ennemis.delete(@ennemis[i])
         end
@@ -467,6 +472,9 @@ class MVC < Gosu::Window
         if @ennemis[j] != nil && @projectilesAllies[i] != nil
           if @model.collision(@projectilesAllies[i].hitbox, @ennemis[j].hitbox)
             @ennemis[j].vie = @ennemis[j].vie - @projectilesAllies[i].degat
+            if @model.hero.burst
+              @ennemis[j].vie = @ennemis[j].vie - 1000000
+            end
             @projectilesAllies.delete(@projectilesAllies[i])
             if @ennemis[j].estMort
               @model.hero.score = @model.hero.score + 5
@@ -483,6 +491,9 @@ class MVC < Gosu::Window
         if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
           @model.hero.vie = @model.hero.vie - @projectilesEnnemis[i].degat
           @projectilesEnnemis.delete(@projectilesEnnemis[i])
+          if !@model.hero.estMort
+            Gosu::Song.new("../Ressources/music/SFX_rocketlauch.mp3").play
+          end
         end
       end
     end
@@ -491,7 +502,11 @@ class MVC < Gosu::Window
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         if @model.collision(@bonus[i].hitbox, @model.hero.hitbox)
-          @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          if @bonus[i].type =="heal"
+            @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          else
+            @model.hero.burst = true
+          end
           @bonus.delete(@bonus[i])
           if @model.hero.vie >= @model.hero.vieMax
             @model.hero.vie = @model.hero.vieMax
@@ -548,7 +563,7 @@ class MVC < Gosu::Window
       end
 
     else
-      if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+20) == 0.0)
+      if @frame > @DEBUT_JEU && (@frame % (60 - @difficulte*14) == 0.0)
         r = @r.rand(0...3)
         if r == 0
           @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
@@ -560,12 +575,11 @@ class MVC < Gosu::Window
       end
     end
 
-
-
-
     # Génération des bonus
-    if @r.rand(0...10000) == 1
-      @bonus.push(Heal.new(@width/2,0))
+    if @r.rand(0...1000) == 0
+      @bonus.push(Heal.new(@r.rand(@width/3...@width*0.75),0))
+    elsif @r.rand(0...1000) == 0
+      @bonus.push(Degat.new(@r.rand(@width/3...@width*0.75),0))
     end
 
     # Suppression des projectiles en dehors de la map
@@ -581,6 +595,19 @@ class MVC < Gosu::Window
         if @projectilesEnnemis[i].y > @height || @projectilesEnnemis[i].x < 0.25*width ||  @projectilesEnnemis[i].x > 0.75*width
           @projectilesEnnemis.delete@projectilesEnnemis[i]
         end
+      end
+    end
+
+    if @model.hero.estMort && @nimp == 0
+      Gosu::Song.new("../Ressources/music/SFX_gameover.mp3").play
+      @nimp = 1
+    end
+
+    if @model.hero.burst
+      @nimp2 += 1
+      if @nimp2 % 400 == 0
+        @nimp2 = 0
+        @model.hero.burst = false
       end
     end
 
@@ -751,6 +778,8 @@ class MVC < Gosu::Window
     @progression = 0
     @model.hero.vie = model.hero.vieMax
     @model.hero.score = 0
+    @nimp = 0
+    Gosu::Song.new("../Ressources/music/InGame.mp3").play
   end
 
 end

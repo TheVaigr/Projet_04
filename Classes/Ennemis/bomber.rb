@@ -6,7 +6,7 @@ class Bomber < Ennemi
   def initialize(image = Gosu::Image.new("../Ressources/enemie_4_fighter_N.png"),
                  degatCollision = 30,
                  degatTir = 100,
-                 vie = 200,
+                 vie = 150,
                  vitesseDeplacement = 100,
                  vitesseTir = 100,
                  cadenceTir = 100,

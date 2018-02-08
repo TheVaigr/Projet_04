@@ -1,17 +1,16 @@
 require_relative 'bonus'
 
-class Heal < Bonus
-  attr_accessor :soin
+class Degat < Bonus
+  attr_accessor :degat
   def initialize(x, y)
     super x,y
+    @type = "degat"
     @x = x
     @y = y
     @vitesse = 3
-    @soin = 100
-    @type = "heal"
-    @image = Gosu::Image.new("../Ressources/popup_life.png")
+    @degat = 10000
+    @image = Gosu::Image.new("../Ressources/stats_power.png")
     @hitbox = Hitbox.new(@x, @y, @image.width, @image.height)
-
   end
 
   def draw

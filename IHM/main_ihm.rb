@@ -189,8 +189,8 @@ class MainIHM < Gosu::Window
       elsif r == 1
         @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
       elsif r == 2
-        for i in 0..@r.rand(0...3)
-          @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        for i in 0..@r.rand(0...2)
+          @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-300),0))
         end
       end
     end

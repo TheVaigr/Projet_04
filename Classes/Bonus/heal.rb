@@ -6,7 +6,7 @@ class Heal < Bonus
     super x,y
     @x = x
     @y = y
-    @vitesse = 1
+    @vitesse = 3
     @soin = 100
     @type = "heal"
     @image = Gosu::Image.new("../Ressources/popup_life.png")

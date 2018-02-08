@@ -10,6 +10,7 @@ require_relative '../Classes/Ennemis/ennemi'
 require_relative '../Classes/Ennemis/artilleur'
 require_relative '../Classes/Bonus/bonus'
 require_relative '../Classes/Bonus/heal'
+require_relative '../Classes/Bonus/degat'
 
 class MVC < Gosu::Window
 
@@ -576,9 +577,9 @@ class MVC < Gosu::Window
 
     # Génération des bonus
     if @r.rand(0...1000) == 0
-      @bonus.push(Heal.new(@r.rand(@width/3...@width*(2/3)),0))
+      @bonus.push(Heal.new(@r.rand(@width/3...@width*0.75),0))
     elsif @r.rand(0...1000) == 0
-      @bonus.push(Degat.new(@r.rand(@width/3...@width*(2/3)),0))
+      @bonus.push(Degat.new(@r.rand(@width/3...@width*0.75),0))
     end
 
     # Suppression des projectiles en dehors de la map
@@ -604,7 +605,7 @@ class MVC < Gosu::Window
 
     if @model.hero.burst
       @nimp2 += 1
-      if @nimp2 % 600 == 0
+      if @nimp2 % 400 == 0
         @nimp2 = 0
         @model.hero.burst = false
       end

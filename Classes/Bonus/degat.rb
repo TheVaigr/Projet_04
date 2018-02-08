@@ -7,7 +7,7 @@ class Degat < Bonus
     @type = "degat"
     @x = x
     @y = y
-    @vitesse = 1
+    @vitesse = 3
     @degat = 10000
     @image = Gosu::Image.new("../Ressources/stats_power.png")
     @hitbox = Hitbox.new(@x, @y, @image.width, @image.height)

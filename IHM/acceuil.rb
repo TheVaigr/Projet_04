@@ -16,7 +16,7 @@ class Acceuil < Gosu::Window
     @pos_y = mouse_y # Position horizontal de la sourie
     @x = 0
     @y = 0
-    @i = 0
+    @rotation = 0
     @color = Gosu::Color.new(100, 255, 255, 255)
     @curseur == "rien"
   end
@@ -30,7 +30,7 @@ class Acceuil < Gosu::Window
     @font2.draw("Règles", @pos_4, 650, 1)
     @font2.draw("Quitter", @pos_5, 850, 1)
 
-    @test1.draw_rot(@x, @y, 1, @i, 0.5,0.5, 1, 1, 0xff_ffffff, :default)
+    @test1.draw_rot(@x, @y, 1, @rotation, 0.5,0.5, 1, 1, 0xff_ffffff, :default)
 
     if @curseur == "jouer"
       @carre = Gosu::draw_rect(850, 230, 220, 100, @color)

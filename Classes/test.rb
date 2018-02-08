@@ -8,6 +8,7 @@ require_relative '../Classes/MVC'
 require_relative '../Model/Model'
 
 
+
 WindowWidth = 1920
 WindowHeight = 1080
 
@@ -23,8 +24,8 @@ WindowHeight = 1080
 #@Test = Test.new(WindowWidth, WindowHeight, @model)
 #@Test.show
 
-@Classement = Classement.new(WindowWidth, WindowHeight)
-@Classement.show
+#@Classement = Classement.new(WindowWidth, WindowHeight)
+#@Classement.show
 
-#@MVC = MVC.new(10,10)
-#@MVC.show
+@MVC = MVC.new(WindowWidth,WindowHeight)
+@MVC.show

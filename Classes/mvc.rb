@@ -400,7 +400,7 @@ class MVC < Gosu::Window
 
   def updateJeu
     @frame = @frame + 1
-    if @frame % 10 == 0
+    if @frame % 100 == 0
       @progression += 1
     end
 
@@ -502,6 +502,7 @@ class MVC < Gosu::Window
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         if @model.collision(@bonus[i].hitbox, @model.hero.hitbox)
+          Gosu::Song.new("../Ressources/music/SFX_laser2.mp3").play
           if @bonus[i].type =="heal"
             @model.hero.vie = @model.hero.vie + @bonus[i].soin
           else

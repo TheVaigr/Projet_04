@@ -3,10 +3,10 @@ require_relative 'ennemi'
 class Gardien < Ennemi
 
   def initialize(image = Gosu::Image.new("../Ressources/enemie_5_mamout_N.png"),
-                 degatCollision = 50,
+                 degatCollision = 40,
                  degatTir = 0,
                  vie = 800,
-                 vitesseDeplacement = 1.5,
+                 vitesseDeplacement = 2,
                  vitesseTir = 100,
                  cadenceTir = 100,
                  x,

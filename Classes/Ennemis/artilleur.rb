@@ -4,7 +4,7 @@ require_relative '../Armes/mitraillette'
 class Artilleur < Ennemi
 
   def initialize(image = Gosu::Image.new("../Ressources/enemie_2_fighter_N.png"),
-                 degatCollision = 10,
+                 degatCollision = 20,
                  degatTir = 20,
                  vie = 100,
                  vitesseDeplacement = 3,

@@ -11,7 +11,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Projet_04@bomber.coverage" NAME="bomber Coverage Results" MODIFIED="1517940812241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes/Ennemis" MODULE_NAME="Projet_04" />
-    <SUITE FILE_PATH="coverage/Projet_04@main.coverage" NAME="main Coverage Results" MODIFIED="1518122525926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
+    <SUITE FILE_PATH="coverage/Projet_04@main.coverage" NAME="main Coverage Results" MODIFIED="1518125305578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
     <SUITE FILE_PATH="coverage/Projet_04@main_ihm.coverage" NAME="main_ihm Coverage Results" MODIFIED="1518026976714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/IHM" MODULE_NAME="Projet_04" />
     <SUITE FILE_PATH="coverage/Projet_04@projectile.coverage" NAME="projectile Coverage Results" MODIFIED="1517959540903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
     <SUITE FILE_PATH="coverage/Projet_04@hero.coverage" NAME="hero Coverage Results" MODIFIED="1518012753664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
@@ -20,21 +20,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="missile.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classes/Armes/missile.rb">
+      <file leaf-file-name="gardien.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/Ennemis/gardien.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="61" lean-forward="false" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
+            <state relative-caret-position="85">
+              <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvc.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mvc.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classes/mvc.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="238" column="100" lean-forward="false" selection-start-line="238" selection-start-column="100" selection-end-line="238" selection-end-column="100" />
+            <state relative-caret-position="510">
+              <caret line="549" column="62" lean-forward="false" selection-start-line="549" selection-start-column="62" selection-end-line="549" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -57,20 +57,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="weapons_2.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ressources/weapons_2.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="weapons_3.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ressources/weapons_3.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ennemi.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classes/Ennemis/ennemi.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -81,21 +67,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="z_order.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classes/z_order.rb">
+      <file leaf-file-name="weapons_3.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ressources/weapons_3.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="artilleur.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/Ennemis/artilleur.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="238">
+              <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/model.rb">
+      <file leaf-file-name="bomber.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classes/Ennemis/bomber.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="canon.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/Armes/canon.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="6" column="67" lean-forward="false" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -122,11 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>widht</find>
-      <find>ran</find>
-      <find>random</find>
-      <find>ptsvi</find>
-      <find>@model.hero.dr</find>
       <find>@ennemis.de</find>
       <find>NIL</find>
       <find>map</find>
@@ -148,10 +146,15 @@
       <find>%</find>
       <find>génér</find>
       <find>difficu</find>
-      <find>drawjeu</find>
       <find>drawJeu</find>
       <find>drawa</find>
       <find>@carre</find>
+      <find>@color</find>
+      <find>color</find>
+      <find>color2</find>
+      <find>song</find>
+      <find>drawjeu</find>
+      <find>généra</find>
     </findStrings>
     <replaceStrings>
       <replace>nil</replace>
@@ -189,16 +192,16 @@
         <option value="$PROJECT_DIR$/Classes/main.rb" />
         <option value="$PROJECT_DIR$/Classes/Ennemis/ennemi.rb" />
         <option value="$PROJECT_DIR$/Classes/projectile.rb" />
-        <option value="$PROJECT_DIR$/Classes/Armes/canon.rb" />
         <option value="$PROJECT_DIR$/Classes/Armes/mitraillette.rb" />
         <option value="$PROJECT_DIR$/Classes/Bonus/heal.rb" />
-        <option value="$PROJECT_DIR$/Classes/Ennemis/artilleur.rb" />
         <option value="$PROJECT_DIR$/Classes/hero.rb" />
         <option value="$PROJECT_DIR$/Classes/Armes/missile.rb" />
-        <option value="$PROJECT_DIR$/Classes/Ennemis/gardien.rb" />
-        <option value="$PROJECT_DIR$/Classes/Ennemis/bomber.rb" />
         <option value="$PROJECT_DIR$/Classes/z_order.rb" />
         <option value="$PROJECT_DIR$/Classes/mvc.rb" />
+        <option value="$PROJECT_DIR$/Classes/Ennemis/gardien.rb" />
+        <option value="$PROJECT_DIR$/Classes/Ennemis/artilleur.rb" />
+        <option value="$PROJECT_DIR$/Classes/Armes/canon.rb" />
+        <option value="$PROJECT_DIR$/Classes/Ennemis/bomber.rb" />
       </list>
     </option>
   </component>
@@ -426,12 +429,12 @@
       <workItem from="1517910587305" duration="42855000" />
       <workItem from="1518002115816" duration="39746000" />
       <workItem from="1518044236316" duration="17456000" />
-      <workItem from="1518087102947" duration="22871000" />
+      <workItem from="1518087102947" duration="25772000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163868000" />
+    <option name="totallyTimeSpent" value="166769000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -659,14 +662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Armes/canon.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="63" lean-forward="false" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/Bonus/heal.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -691,38 +686,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/gardien.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="26" lean-forward="false" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/bomber.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/artilleur.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/ennemi.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="59" lean-forward="false" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/z_order.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -734,7 +697,7 @@
     <entry file="file://$PROJECT_DIR$/Model/model.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -780,8 +743,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/mvc.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="238" column="100" lean-forward="false" selection-start-line="238" selection-start-column="100" selection-end-line="238" selection-end-column="100" />
+        <state relative-caret-position="510">
+          <caret line="549" column="62" lean-forward="false" selection-start-line="549" selection-start-column="62" selection-end-line="549" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/ennemi.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="59" lean-forward="false" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Armes/canon.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="67" lean-forward="false" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/artilleur.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/gardien.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Ennemis/bomber.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
           <folding />
         </state>
       </provider>

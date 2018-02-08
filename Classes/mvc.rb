@@ -238,7 +238,7 @@ class MVC < Gosu::Window
     else
       @x += 1
       @carre = Gosu::draw_rect(0, 0, @width, @height, @color2)
-      @font1.draw("GAME OVER", @width/2 - @font1.text_width("GAME OVER")/2, @height/2, ZOrder::Hero)
+      @font1.draw("GAME OVER", @width/2 - @font1.text_width("GAME OVER")/2, @height/2, ZOrder::GameOver)
       if @x % 400 == 0
         @model.remplirTableaux(@difficulte)
         resetPartie

@@ -150,8 +150,8 @@ class MainIHM < Gosu::Window
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         if @model.collision(@bonus[i].hitbox, @model.hero.hitbox)
-          @bonus.delete(@bonus[i])
           @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          @bonus.delete(@bonus[i])
           if @model.hero.vie >= @model.hero.vieMax
             @model.hero.vie = @model.hero.vieMax
           end
@@ -196,8 +196,8 @@ class MainIHM < Gosu::Window
     end
 
     # Génération des bonus
-    if @r.rand(0...120) == 1
-      @bonus.push(Heal.new(@width/2,0))
+    if @r.rand(0...1500) == 1
+      @bonus.push(Heal.new(@r.rand(@width*0.25...@width*0.75-100),0))
     end
 
     # Suppression des projectiles en dehors de la map

@@ -63,9 +63,11 @@ class MVC < Gosu::Window
     @height = height
 
     @song = Gosu::Song.new("../Ressources/music/InGame.mp3")
-    @song.volume = 0.0
+    @song.volume = 0.3
     @song.play(true)
 
+    @nimp = 0
+    @nimp2 = 0
     @frame = 0
     @r = Random.new
 
@@ -428,6 +430,9 @@ class MVC < Gosu::Window
         if @model.collision(@model.hero.hitbox,@ennemis[i].hitbox)
           @model.hero.vie -= @ennemis[i].degatCollision
           @ennemis.delete(@ennemis[i])
+          if !@model.hero.estMort
+            Gosu::Song.new("../Ressources/music/SFX_rocketlauch.mp3").play
+          end
         elsif @ennemis[i].estDehors
           @ennemis.delete(@ennemis[i])
         end
@@ -466,6 +471,9 @@ class MVC < Gosu::Window
         if @ennemis[j] != nil && @projectilesAllies[i] != nil
           if @model.collision(@projectilesAllies[i].hitbox, @ennemis[j].hitbox)
             @ennemis[j].vie = @ennemis[j].vie - @projectilesAllies[i].degat
+            if @model.hero.burst
+              @ennemis[j].vie = @ennemis[j].vie - 1000000
+            end
             @projectilesAllies.delete(@projectilesAllies[i])
             if @ennemis[j].estMort
               @model.hero.score = @model.hero.score + 5
@@ -482,6 +490,9 @@ class MVC < Gosu::Window
         if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
           @model.hero.vie = @model.hero.vie - @projectilesEnnemis[i].degat
           @projectilesEnnemis.delete(@projectilesEnnemis[i])
+          if !@model.hero.estMort
+            Gosu::Song.new("../Ressources/music/SFX_rocketlauch.mp3").play
+          end
         end
       end
     end
@@ -490,7 +501,11 @@ class MVC < Gosu::Window
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         if @model.collision(@bonus[i].hitbox, @model.hero.hitbox)
-          @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          if @bonus[i].type =="heal"
+            @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          else
+            @model.hero.burst = true
+          end
           @bonus.delete(@bonus[i])
           if @model.hero.vie >= @model.hero.vieMax
             @model.hero.vie = @model.hero.vieMax
@@ -559,12 +574,11 @@ class MVC < Gosu::Window
       end
     end
 
-
-
-
     # Génération des bonus
-    if @r.rand(0...10000) == 1
-      @bonus.push(Heal.new(@width/2,0))
+    if @r.rand(0...1000) == 0
+      @bonus.push(Heal.new(@r.rand(@width/3...@width*(2/3)),0))
+    elsif @r.rand(0...1000) == 0
+      @bonus.push(Degat.new(@r.rand(@width/3...@width*(2/3)),0))
     end
 
     # Suppression des projectiles en dehors de la map
@@ -580,6 +594,19 @@ class MVC < Gosu::Window
         if @projectilesEnnemis[i].y > @height || @projectilesEnnemis[i].x < 0.25*width ||  @projectilesEnnemis[i].x > 0.75*width
           @projectilesEnnemis.delete@projectilesEnnemis[i]
         end
+      end
+    end
+
+    if @model.hero.estMort && @nimp == 0
+      Gosu::Song.new("../Ressources/music/SFX_gameover.mp3").play
+      @nimp = 1
+    end
+
+    if @model.hero.burst
+      @nimp2 += 1
+      if @nimp2 % 600 == 0
+        @nimp2 = 0
+        @model.hero.burst = false
       end
     end
 
@@ -750,6 +777,8 @@ class MVC < Gosu::Window
     @progression = 0
     @model.hero.vie = model.hero.vieMax
     @model.hero.score = 0
+    @nimp = 0
+    Gosu::Song.new("../Ressources/music/InGame.mp3").play
   end
 
 end

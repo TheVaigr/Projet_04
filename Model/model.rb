@@ -9,8 +9,9 @@ class Model
 
   attr_accessor :hero, :niveauDifficulte, :meilleursJoueursScore, :meilleursJoueursPseudo
 
-  def initialize(pseudo, couleur, width, height)
-    @hero = Hero.new(pseudo, couleur, width/2, height-150)
+  def initialize(couleur, width, height)
+    couleur = "vert"
+    @hero = Hero.new("", couleur, width/2, height-150)
     initTableaux
   end
 
@@ -31,32 +32,32 @@ class Model
   # Init tableaux des scores
   def initTableaux
     @meilleursJoueursScore = [[],[],[]]
-    for i in 1..3
+    for i in 1..4
       @meilleursJoueursScore.push([])
       for j in 0..4
         @meilleursJoueursScore[i][j]=0
       end
     end
     @meilleursJoueursPseudo = [[],[],[]]
-    for i in 1..3
+    for i in 1..4
       @meilleursJoueursPseudo.push([])
       for j in 0..4
-        @meilleursJoueursPseudo[i][j]=""
+        @meilleursJoueursPseudo[i][j]="---"
       end
     end
   end
 
   # avant fermeture
-  def remplirTableaux
+  def remplirTableaux(difficulte)
     trie = false
-    for i in 1..3
-      if @difficulte == i
+    for i in 1..4
+      if difficulte == i
         for j in 0..4
-          if trie == false && @model.hero.score > @meilleursJoueursScore[i][j]
+          if trie == false && @hero.score > @meilleursJoueursScore[i][j]
             tempPseudo = @meilleursJoueursPseudo[i][j]
             tempScore = @meilleursJoueursScore[i][j]
-            @meilleursJoueursPseudo[i][j] = @model.hero.pseudo
-            @meilleursJoueursScore[i][j] = @model.hero.score
+            @meilleursJoueursPseudo[i][j] = @hero.pseudo
+            @meilleursJoueursScore[i][j] = @hero.score
             trie = true
           elsif trie == true
             tempPseudo2 = @meilleursJoueursPseudo[i][j]

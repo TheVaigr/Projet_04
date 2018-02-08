@@ -5,7 +5,7 @@ require_relative 'Armes/mitraillette'
 require_relative 'Armes/arme'
 
 class Hero
-  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y, :image, :vieMax
+  attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y, :image, :vieMax, :couleur
 
   def initialize(pseudo, couleur, x, y)
     @pseudo = pseudo
@@ -47,18 +47,36 @@ class Hero
   def go_left
     @velocityX -= @vitesse
     # changement de l'image du héros : tourné vers la gauche
-    @image = Gosu::Image.new("../Ressources/ship_1_L.png")
+    if @couleur == "vert"
+      @image = Gosu::Image.new("../Ressources/ship_1_L.png")
+    elsif @couleur == "bleu"
+      @image = Gosu::Image.new("../Ressources/ship_2_L.png")
+    else @couleur == "jaune"
+      @image = Gosu::Image.new("../Ressources/ship_3_L.png")
+    end
   end
 
   def go_front
     # changement de l'image du héros : tout droit
-    @image = Gosu::Image.new("../Ressources/ship_1_N.png")
+    if @couleur == "vert"
+      @image = Gosu::Image.new("../Ressources/ship_1_N.png")
+    elsif @couleur == "bleu"
+      @image = Gosu::Image.new("../Ressources/ship_2_N.png")
+    else @couleur == "jaune"
+    @image = Gosu::Image.new("../Ressources/ship_3_N.png")
+    end
   end
 
   def go_right
     @velocityX += @vitesse
     # changement de l'image du héros : tourné vers la droite
-    @image = Gosu::Image.new("../Ressources/ship_1_R.png")
+    if @couleur == "vert"
+      @image = Gosu::Image.new("../Ressources/ship_1_R.png")
+    elsif @couleur == "bleu"
+      @image = Gosu::Image.new("../Ressources/ship_2_R.png")
+    else @couleur == "jaune"
+    @image = Gosu::Image.new("../Ressources/ship_3_R.png")
+    end
   end
 
   def move

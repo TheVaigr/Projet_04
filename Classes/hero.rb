@@ -15,7 +15,7 @@ class Hero
     @arme = @armes[0]
     @vieMax = 100
     @vie = @vieMax
-    @vitesse = 8
+    @vitesse = 10
     @progression = 0
     @score = 0
     @couleur = couleur

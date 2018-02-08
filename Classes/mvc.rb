@@ -507,7 +507,6 @@ class MVC < Gosu::Window
 
     # Génération des ennemis aléatoire
     if @difficulte == 4
-      puts (30/1+20 - @progression/20)
       if (30/1+20 - @progression/20) < 10
         if @frame > @DEBUT_JEU && @frame % 10 == 0.0
           r = @r.rand(0...3)
@@ -549,9 +548,9 @@ class MVC < Gosu::Window
 
 
     # Génération des bonus
-    if @r.rand(0...1000) == 1
-      @bonus.push(Heal.new(@width/2,0))
-    end
+    #if @r.rand(0...1000) == 1
+      #@bonus.push(Heal.new(@width/2,0))
+    #end
 
     # Suppression des projectiles en dehors de la map
     for i in 0..@projectilesAllies.size-1

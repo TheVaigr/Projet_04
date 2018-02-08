@@ -5,7 +5,7 @@ class Gardien < Ennemi
   def initialize(image = Gosu::Image.new("../Ressources/enemie_5_mamout_N.png"),
                  degatCollision = 50,
                  degatTir = 0,
-                 vie = 500,
+                 vie = 800,
                  vitesseDeplacement = 1.5,
                  vitesseTir = 100,
                  cadenceTir = 100,

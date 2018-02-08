@@ -219,13 +219,11 @@ class MVC < Gosu::Window
         @bonus[i].draw
       end
     end
-    if !@model.hero.estMort
       for i in 0..@projectilesAllies.size-1
         if @projectilesAllies[i] != nil
           @projectilesAllies[i].draw
         end
       end
-    end
     for i in 0..@projectilesEnnemis.size-1
       if @projectilesEnnemis[i] != nil
         @projectilesEnnemis[i].draw
@@ -236,7 +234,10 @@ class MVC < Gosu::Window
       @x += 1
     else
       @x += 1
-      if @x % 300 == 0
+      color = Gosu::Color.new(100, 128, 0, 0)
+      @carre = Gosu::draw_rect(0, 0, @width, @height, color)
+      @font1.draw("GAME OVER", @width/2 - @font1.text_width("GAME OVER")/2, @height/2, ZOrder::Hero)
+      if @x % 500 == 0
         @model.remplirTableaux(@difficulte)
         resetPartie
         @context = :classement
@@ -249,17 +250,21 @@ class MVC < Gosu::Window
     @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
 
-
-    x = 0
+    x = 150
     y = 600
     for i in 0..@model.hero.armes.size-1
-      if @model.hero.armes[i] == @model.hero.arme
-
-      end
-        image = Gosu::Image.new("../Ressources/weapons_"+i.to_s+".png")
+        image = Gosu::Image.new("../Ressources/weapons_"+(i+1).to_s+".png")
         image.draw(x, y, ZOrder::Hero)
-        x += 40
+        if @model.hero.armes[i] == @model.hero.arme
+          @ligne = Gosu::draw_line(x, y+image.height*1.2, Gosu::Color.new(0xff_ff0000), x+image.width, y+image.height*1.2, Gosu::Color.new(0xff_ff0000))
+          @ligne = Gosu::draw_line(x, y+image.height*1.2+1, Gosu::Color.new(0xff_ff0000), x+image.width, y+image.height*1.2+1, Gosu::Color.new(0xff_ff0000))
+          @ligne = Gosu::draw_line(x, y+image.height*1.2+2, Gosu::Color.new(0xff_ff0000), x+image.width, y+image.height*1.2+2, Gosu::Color.new(0xff_ff0000))
+        end
+        x += 100
     end
+
+
+
 
 
     @font5.draw(@model.hero.pseudo, 240-@font1.text_width(@model.hero.pseudo)/2, 100, 2)
@@ -496,7 +501,7 @@ class MVC < Gosu::Window
     end
 
     # Tir du héro
-    if ((@frame % @model.hero.arme.cadenceTir) == 0)
+    if ((@frame % @model.hero.arme.cadenceTir) == 0) && !@model.hero.estMort
       projectiles = @model.hero.tire
       for i in 0..projectiles.size
         @projectilesAllies.push(projectiles[i])

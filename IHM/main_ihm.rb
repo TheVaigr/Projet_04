@@ -46,44 +46,7 @@ class MainIHM < Gosu::Window
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
 
 
-    # Init tableaux des scores
-    @meilleursJoueursScore = [[],[],[]]
-    for i in 1..3
-      @meilleursJoueursScore.push([])
-      for j in 0..3
-        @meilleursJoueursScore[i][j]=0
-      end
-    end
-    @meilleursJoueursPseudo = [[],[],[]]
-    for i in 1..3
-      @meilleursJoueursPseudo.push([])
-      for j in 0..3
-        @meilleursJoueursPseudo[i][j]=""
-      end
-    end
 
-    # avant fermeture
-    trie = false
-    for i in 1..3
-      if @difficulte == i
-        for j in 0..3
-          if trie == false && @model.hero.score > @meilleursJoueursScore[i][j]
-            tempPseudo = @meilleursJoueursPseudo[i][j]
-            tempScore = @meilleursJoueursScore[i][j]
-            @meilleursJoueursPseudo[i][j] = @model.hero.pseudo
-            @meilleursJoueursScore[i][j] = @model.hero.score
-            trie = true
-          elsif trie == true
-            tempPseudo2 = @meilleursJoueursPseudo[i][j]
-            tempScore2 = @meilleursJoueursScore[i][j]
-            @meilleursJoueursScore[i][j] = tempScore
-            @meilleursJoueursPseudo[i][j] = tempPseudo
-            tempPseudo = tempPseudo2
-            tempScore = tempScore2
-          end
-        end
-      end
-    end
 
 
 
@@ -196,7 +159,7 @@ class MainIHM < Gosu::Window
 
     # Génération des ennemis aléatoire
     postGame = 0
-    if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+20) == 0.0) && @frame < @FIN_JEU
+    if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+15) == 0.0) && @frame < @FIN_JEU
       r = @r.rand(0...3)
       if r == 0
         @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))

@@ -9,7 +9,7 @@ class Artilleur < Ennemi
                  vie = 100,
                  vitesseDeplacement = 3,
                  vitesseTir = 5,
-                 cadenceTir = 100,
+                 cadenceTir = 120,
                  x,
                  y)
     super

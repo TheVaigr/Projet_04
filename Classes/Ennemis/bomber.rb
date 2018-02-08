@@ -14,6 +14,10 @@ class Bomber < Ennemi
                  y)
     super
     @arme = nil
+    r = Random.new
+    if r.rand(0...2) == 0
+      @direction = "gauche"
+    end
   end
 
   def seDeplacer(difficulte)
@@ -24,7 +28,6 @@ class Bomber < Ennemi
     end
 
     if @direction == "gauche"
-
       @x -= difficulte*4
     else
       @x += difficulte*4

@@ -24,7 +24,7 @@ class Projectile
       @y = @y - @vitesse
     elsif @type = "mitrailette" && @provenance == "ennemi"
       @y = @y + @vitesse
-      @x = @x + @distanceX/99
+      @x = @x + @distanceX/110
     end
   end
 

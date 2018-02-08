@@ -12,7 +12,7 @@ class Hero
     @armes = []
     chargerArmes
     @arme = @armes[0]
-    @vieMax = 100
+    @vieMax = 1000
     @vie = @vieMax
     @vitesse = 8
     @progression = 0

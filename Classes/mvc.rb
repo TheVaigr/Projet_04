@@ -548,9 +548,9 @@ class MVC < Gosu::Window
 
 
     # Génération des bonus
-    #if @r.rand(0...1000) == 1
-      #@bonus.push(Heal.new(@width/2,0))
-    #end
+    if @r.rand(0...10000) == 1
+      @bonus.push(Heal.new(@width/2,0))
+    end
 
     # Suppression des projectiles en dehors de la map
     for i in 0..@projectilesAllies.size-1

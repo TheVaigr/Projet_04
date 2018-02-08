@@ -5,32 +5,32 @@ class Choix_lvl < Gosu::Window
     self.caption = "Choix du niveau"
     #@background_image = Gosu::Image.new("../ressources/test.jpg")
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
+    @vaisseau = Gosu::Image.new("../ressources/enemie_4_fighter_N.png") # Prend comme paramètre une image d'un vaisseau
     @vaisseau1 = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
     @vaisseau2 = Gosu::Image.new("../ressources/enemie_4_fighter_N.png")
     @vaisseau3 = Gosu::Image.new("../ressources/enemie_2_heavyfighter_N.png")
     @font1 = Gosu::Font.new(100)
     @font2 = Gosu::Font.new(60)
     @font3 = Gosu::Font.new(40)
-    @pos_1 = (width-@font1.text_width("Paramètres de la partie")) / 2 # Titre
-    @vaisseau = Gosu::Image.new("../ressources/enemie_4_fighter_N.png") # Prend comme paramètre une image d'un vaisseau
+    @pos_6 = (width-@font1.text_width("Paramètres de la partie")) / 2 # Titre
     @valeur_niveau = "Niveau facile" # Prend comme paramètre un niveau de difficulté
     @curseur = "rien"
     @nom = ""
     @color = Gosu::Color.new(100, 255, 255, 255)
     @pos_x = mouse_x # Position verticale de la sourie
     @pos_y = mouse_y # Position horizontal de la sourie
-    @i = 0
+    @rotation = 0
   end
 
   def draw
     #@background_image.draw(0, 0, 0)
-    @font1.draw("Paramètres de la partie", @pos_1, 30, 1)
+    @font1.draw("Paramètres de la partie", @pos_6, 30, 1)
       # Dessin des bouttons de changement de vaisseau
     @vaisseau1.draw(200, 150, 1, 2, 2, 0xff_ffffff, :default)
     @vaisseau2.draw(200, 400, 1, 2, 2, 0xff_ffffff, :default)
     @vaisseau3.draw(200, 650, 1, 2, 2, 0xff_ffffff, :default)
       # Image tournante du vaisseau selectionner
-    @vaisseau.draw_rot(width/2, 300, 1, @i, 0.5,0.5, 2, 2, 0xff_ffffff, :default)
+    @vaisseau.draw_rot(width/2, 300, 1, @rotation, 0.5,0.5, 2, 2, 0xff_ffffff, :default)
       # Nom du niveau selectionner
     @font3.draw(@valeur_niveau, width/2-@font3.text_width(@valeur_niveau)/2, 500, 1)
       # Nom du joueur taper au clavier
@@ -164,7 +164,7 @@ class Choix_lvl < Gosu::Window
   def update
     @pos_x = mouse_x
     @pos_y = mouse_y
-    @i += 2
+    @rotation += 2
     if @pos_x < 400 && @pos_x > 200 && @pos_y < 350 && @pos_y > 150
       @curseur = "vaisseau 1"
     elsif @pos_x < 400 && @pos_x > 200 && @pos_y < 600 && @pos_y > 400

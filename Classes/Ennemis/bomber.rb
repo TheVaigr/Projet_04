@@ -4,7 +4,7 @@ class Bomber < Ennemi
 
   attr_accessor :distanceX, :distanceY
   def initialize(image = Gosu::Image.new("../Ressources/enemie_4_fighter_N.png"),
-                 degatCollision = 50,
+                 degatCollision = 30,
                  degatTir = 100,
                  vie = 100,
                  vitesseDeplacement = 100,
@@ -28,12 +28,12 @@ class Bomber < Ennemi
     end
 
     if @direction == "gauche"
-      @x -= difficulte*4
+      @x -= difficulte+7
     else
-      @x += difficulte*4
+      @x += difficulte+7
     end
 
-    @y += difficulte*4
+    @y += difficulte+7
   end
 
 end

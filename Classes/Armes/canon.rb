@@ -4,7 +4,7 @@ class Canon < Arme
 
   def initialize
     @type = "canon"
-    super(Gosu::Image.new("../Ressources/missil_2.png"), 7, 10, 100)
+    super(Gosu::Image.new("../Ressources/missil_2.png"), 10, 16, 100)
   end
 
 end

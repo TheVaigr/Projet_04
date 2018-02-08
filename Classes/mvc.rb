@@ -13,11 +13,10 @@ require_relative '../Classes/Bonus/heal'
 
 class MVC < Gosu::Window
 
-  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame, :bonus ,:couleur
+  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame, :bonus ,:couleur, :DEBUT_JEU, :FIN_JEU
   def initialize(width, height, model)
     super #width, height
     @DEBUT_JEU = 100
-    @FIN_JEU = 10000
 
     @model = model
     @difficulte = 1
@@ -234,9 +233,12 @@ class MVC < Gosu::Window
     end
     if !@model.hero.estMort
       @model.hero.draw
+      @x += 1
     else
-      @x += 2
+      @x += 1
       if @x % 300 == 0
+        @model.remplirTableaux(@difficulte)
+        resetPartie
         @context = :classement
       end
     end
@@ -254,7 +256,7 @@ class MVC < Gosu::Window
     @font5.draw(@difficulte, 300, 200, 2)
     @font5.draw("Avancée :", 100, 300, 2)
     @font5.draw(@progression, 300, 300, 2)
-    @font5.draw("%", 355, 300, 2)
+    @font5.draw("km", 355, 300, 2)
     @font5.draw("Score :", 100, 400, 2)
     @font5.draw(@model.hero.score, 300, 400, 2)
     @font5.draw("Armes", 100, 500, 2)
@@ -380,8 +382,8 @@ class MVC < Gosu::Window
 
   def updateJeu
     @frame = @frame + 1
-    if @progression < 100
-      @progression = (@frame*100)/@FIN_JEU
+    if @frame % 10 == 0
+      @progression += 1
     end
 
     @background1 += 3
@@ -504,22 +506,50 @@ class MVC < Gosu::Window
     end
 
     # Génération des ennemis aléatoire
-    postGame = 0
-    if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+15) == 0.0) && @frame < @FIN_JEU
-      r = @r.rand(0...3)
-      if r == 0
-        @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
-      elsif r == 1
-        @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
-      elsif r == 2
-        for i in 0..@r.rand(0...2)
+    if @difficulte == 4
+      puts (30/1+20 - @progression/20)
+      if (30/1+20 - @progression/20) < 10
+        if @frame > @DEBUT_JEU && @frame % 10 == 0.0
+          r = @r.rand(0...3)
+          if r == 0
+            @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
+          elsif r == 1
+            @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
+          elsif r == 2
+            @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-300),0))
+          end
+        end
+      else
+        if @frame > @DEBUT_JEU && (@frame % (30/1+20 - @progression/20) == 0.0)
+          r = @r.rand(0...3)
+          if r == 0
+            @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
+          elsif r == 1
+            @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
+          elsif r == 2
+            @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-300),0))
+          end
+        end
+      end
+
+    else
+      if @frame > @DEBUT_JEU && (@frame % (30/@difficulte.to_f+20) == 0.0)
+        r = @r.rand(0...3)
+        if r == 0
+          @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        elsif r == 1
+          @ennemis.push(Bomber.new(@r.rand(@width*0.25...@width*0.75-100),0))
+        elsif r == 2
           @ennemis.push(Gardien.new(@r.rand(@width*0.25...@width*0.75-300),0))
         end
       end
     end
 
+
+
+
     # Génération des bonus
-    if @r.rand(0...1000+300*1.2) == 1
+    if @r.rand(0...1000) == 1
       @bonus.push(Heal.new(@width/2,0))
     end
 
@@ -703,6 +733,7 @@ class MVC < Gosu::Window
     @projectilesEnnemis=[]
     @bonus = []
     @frame = 0
+    @progression = 0
     @model.hero.vie = model.hero.vieMax
     @model.hero.score = 0
   end

@@ -44,6 +44,8 @@ class Projectile
       else
         @image = Gosu::Image.new("../Ressources/tire_violet.png")
       end
+    elsif @type == "missile"
+      @image = Gosu::Image.new("../Ressources/missil_4.png")
     else
       @image = Gosu::Image.new("../Ressources/missil_2.png")
     end

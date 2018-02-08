@@ -3,6 +3,7 @@ require_relative 'projectile'
 require_relative 'Armes/canon'
 require_relative 'Armes/mitraillette'
 require_relative 'Armes/arme'
+require_relative 'Armes/missile'
 
 class Hero
   attr_accessor :pseudo, :arme, :armes, :score, :vitesse, :hitbox, :vie, :x, :y, :image, :vieMax, :couleur
@@ -12,7 +13,7 @@ class Hero
     @armes = []
     chargerArmes
     @arme = @armes[0]
-    @vieMax = 200
+    @vieMax = 100
     @vie = @vieMax
     @vitesse = 8
     @progression = 0
@@ -120,6 +121,7 @@ class Hero
   def chargerArmes
     @armes.push(Mitraillette.new)
     @armes.push(Canon.new)
+    @armes.push(Missile.new)
   end
 
 end

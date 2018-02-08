@@ -7,10 +7,12 @@ require_relative '../Classes/Ennemis/bomber'
 require_relative '../Classes/Ennemis/gardien'
 require_relative '../Classes/Ennemis/ennemi'
 require_relative '../Classes/Ennemis/artilleur'
+require_relative '../Classes/Bonus/bonus'
+require_relative '../Classes/Bonus/heal'
 
 class MainIHM < Gosu::Window
 
-  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame
+  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame, :bonus
 
   def initialize(width, height, difficulte, model)
     @DEBUT_JEU = 100
@@ -45,7 +47,7 @@ class MainIHM < Gosu::Window
     #@arme = "mitrailleuse"
     @image = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
 
-
+    @bonus = []
 
 
 
@@ -68,7 +70,7 @@ class MainIHM < Gosu::Window
       @background2 = -1080
     end
 
-    # déplacement du héro
+    # Déplacement du héro
     if (!Gosu::button_down?(Gosu::KbRight)) && (!Gosu::button_down?(Gosu::KbLeft))
       @model.hero.go_front
     elsif Gosu::button_down?(Gosu::KbRight) && @model.hero.x < @width*0.75 - @model.hero.image.width
@@ -92,6 +94,11 @@ class MainIHM < Gosu::Window
       end
     end
 
+    # Deplacement des bonus
+    for i in 0..@bonus.size-1
+      @bonus[i].seDeplace
+    end
+
     # maj des hitbox (hero, ennemis, projectiles + déplacement)
     @model.hero.majHitbox
     for i in 0..@ennemis.size-1
@@ -108,6 +115,9 @@ class MainIHM < Gosu::Window
         @projectilesEnnemis[i].seDeplacer
         @projectilesEnnemis[i].majHitbox
       end
+    end
+    for i in 0..@bonus.size-1
+      @bonus[i].majHitbox
     end
 
     # Test de collision entre ennemis et projectiles alliés
@@ -132,6 +142,19 @@ class MainIHM < Gosu::Window
         if @model.collision(@projectilesEnnemis[i].hitbox, @model.hero.hitbox)
           @model.hero.vie = @model.hero.vie - @projectilesEnnemis[i].degat
           @projectilesEnnemis.delete(@projectilesEnnemis[i])
+        end
+      end
+    end
+
+    # Test de collision entre hero et bonus
+    for i in 0..@bonus.size-1
+      if @bonus[i] != nil
+        if @model.collision(@bonus[i].hitbox, @model.hero.hitbox)
+          @bonus.delete(@bonus[i])
+          @model.hero.vie = @model.hero.vie + @bonus[i].soin
+          if @model.hero.vie >= @model.hero.vieMax
+            @model.hero.vie = @model.hero.vieMax
+          end
         end
       end
     end
@@ -172,6 +195,11 @@ class MainIHM < Gosu::Window
       end
     end
 
+    # Génération des bonus
+    if @r.rand(0...120) == 1
+      @bonus.push(Heal.new(@width/2,0))
+    end
+
     # Suppression des projectiles en dehors de la map
     for i in 0..@projectilesAllies.size-1
       if @projectilesAllies[i] != nil
@@ -197,6 +225,11 @@ end
   def draw
     background_image.draw(480,@background1,-1)
     background_image.draw(480,@background2,-1)
+    for i in 0..@bonus.size-1
+      if @bonus[i] != nil
+        @bonus[i].draw
+      end
+    end
     for i in 0..@projectilesAllies.size-1
       if @projectilesAllies[i] != nil
       @projectilesAllies[i].draw

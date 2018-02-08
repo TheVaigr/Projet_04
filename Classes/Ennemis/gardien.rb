@@ -6,7 +6,7 @@ class Gardien < Ennemi
                  degatCollision = 50,
                  degatTir = 0,
                  vie = 400,
-                 vitesseDeplacement = 1,
+                 vitesseDeplacement = 1.5,
                  vitesseTir = 100,
                  cadenceTir = 100,
                  x,
@@ -16,7 +16,6 @@ class Gardien < Ennemi
   end
 
   def seDeplacer(difficulte)
-
     @y += @vitesseDeplacement*difficulte
   end
 

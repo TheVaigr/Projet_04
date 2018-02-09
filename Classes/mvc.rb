@@ -368,7 +368,7 @@ class MVC < Gosu::Window
     @font4.draw(@model.meilleursJoueursPseudo[4][4], 1680-@font4.text_width(@model.meilleursJoueursPseudo[4][4])/2, 800, 1)
     @font5.draw(@model.meilleursJoueursScore[4][4], 1680-@font5.text_width(@model.meilleursJoueursScore[4][4])/2, 850, 1)
     # Bouton retour
-    @font2.draw("Acceuil", 960-@font2.text_width("Acceuil")/2, 950, 1)
+    @font2.draw("Retour", 960-@font2.text_width("Retour")/2, 950, 1)
 
     if @curseur == "acceuil"
       @carre = Gosu::draw_rect(830, 930, 260, 100, @color)
@@ -508,10 +508,10 @@ class MVC < Gosu::Window
     end
 
     # Texte
-    @font2.draw("Acceuil",(width-@font2.text_width("Retour"))/ 2, 950, 1)
-    @font7.draw("Dans ce jeu, vous affronterez l'infini de l'espace,toutefois celui-ci est rempli d'ennemis de", (width-@font7.text_width("Dans ce jeu, vous affronterez l'infini de l'espace,toutefois celui-ci est rempli d'ennemis de"))/ 2, 150, 1)
+    @font2.draw("Retour",(width-@font2.text_width("Retour"))/ 2, 950, 1)
+    @font7.draw("Dans ce jeu, vous affronterez l'infini de l'espace, toutefois celui-ci est rempli d'ennemis de", (width-@font7.text_width("Dans ce jeu, vous affronterez l'infini de l'espace, toutefois celui-ci est rempli d'ennemis de"))/ 2, 150, 1)
     @font7.draw("toutes sortes, vous devrez soit les détruire a l'aide de vos differentes armes soit les éviter", (width-@font7.text_width("toutes sortes, vous devrez soit les détruire a l'aide de vos differentes armes soit les éviter"))/ 2, 200, 1)
-    @font7.draw("car toutes collisions endommageraient votre vaisseau, et s'il devient trop endommager, vous", (width-@font7.text_width("car toutes collisions endommageraient votre vaisseau, et s'il devient trop endommager, vous"))/ 2, 250, 1)
+    @font7.draw("car toutes collisions endommageraient votre vaisseau, et s'il devient trop endommagé, vous", (width-@font7.text_width("car toutes collisions endommageraient votre vaisseau, et s'il devient trop endommagé, vous"))/ 2, 250, 1)
     @font7.draw("succomberez. Des bonus apparaiteront pour vous aidez dans votre périple.", (width-@font7.text_width("succomberez. Des bonus apparaiteront pour vous aidez dans votre périple."))/ 2, 300, 1)
 
     @ligne = Gosu::draw_line(560, 400, @color_trait_1, 1360, 400, @color_trait_2)

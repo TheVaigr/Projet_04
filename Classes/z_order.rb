@@ -1,7 +1,9 @@
 module ZOrder
 
-  Background = -2
-  Ennemis = -1
+  Background_intermediaire_1 = -2
+  Background_intermediaire_2 = -1
+  Background = 0
+  Ennemis = 1
   Hero = 2
   Tir = 3
   GameOver = 4

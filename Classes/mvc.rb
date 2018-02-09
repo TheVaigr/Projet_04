@@ -47,6 +47,7 @@ class MVC < Gosu::Window
     @color2 = Gosu::Color.new(0xff_f0ffff)
     @color3 = Gosu::Color.new(0xff_ff0fff)
     @color4 = Gosu::Color.new(0xff_fff0ff)
+    @color5 = Gosu::Color.new(255, 0, 0, 0)
     @font1 = Gosu::Font.new(100, name: "../ressources/font/hemi.ttf")
     @font2 = Gosu::Font.new(60,name: "../ressources/font/hemi.ttf")
     @font3 = Gosu::Font.new(40, name: "../ressources/font/hemi.ttf")
@@ -174,7 +175,7 @@ class MVC < Gosu::Window
     @font2.draw("Classement", @pos_3, 450, 1)
     @font2.draw("Règles", @pos_4, 650, 1)
     @font2.draw("Quitter", @pos_5, 850, 1)
-    #@carre = Gosu::draw_rect(850, 230, 220, 100, @color)
+
 
     if @curseur == "jouer"
       @vaisseau2.draw(650, 200, 1, 1.5, 1.5, 0xff_ffffff, :default)
@@ -250,10 +251,10 @@ class MVC < Gosu::Window
 
   def drawJeu
     self.caption = "Milky Way Light"
-    @background.draw(@width/4-1920, 0, ZOrder::Background)
-    @background.draw(@width*(3/4.0), 0, ZOrder::Background)
-    @background_image_jeu.draw(480,@background1,-1)
-    @background_image_jeu.draw(480,@background2,-1)
+    @background.draw(0, 0, ZOrder::Background_intermediaire_2)
+    @carre = Gosu::draw_rect(480, 0, 959, 1080, @color5)
+    @background_image_jeu.draw(480,@background1,ZOrder::Background)
+    @background_image_jeu.draw(480,@background2,ZOrder::Background)
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         @bonus[i].draw
@@ -285,11 +286,8 @@ class MVC < Gosu::Window
       @ennemis[i].draw
     end
 
-    @ligne = Gosu::draw_line(480, 0, Gosu::Color.new(0xff_ffffff), 480, 1080, Gosu::Color.new(0xff_ffffff))
-    @ligne = Gosu::draw_line(1440, 0, Gosu::Color.new(0xff_ffffff), 1440, 1080, Gosu::Color.new(0xff_ffffff))
-
-    x = 60
-    y = 600
+    x = 100
+    y = 500
     for i in 0..@model.hero.armes.size-1
         image = Gosu::Image.new("../Ressources/weapons_"+(i+1).to_s+".png")
         image.draw(x, y, ZOrder::Hero)
@@ -310,7 +308,6 @@ class MVC < Gosu::Window
     @font5.draw("km", 355, 300, 2)
     @font5.draw("Score :", 100, 400, 2)
     @font5.draw(@model.hero.score, 300, 400, 2)
-    @font5.draw("Armes", 100, 500, 2)
   end
 
   #################################################
@@ -753,9 +750,9 @@ class MVC < Gosu::Window
 
     # Génération des bonus
     if @r.rand(0...1000) == 0
-      @bonus.push(Heal.new(@r.rand(@width/3...@width*0.75),0))
+      @bonus.push(Heal.new(@r.rand(@width/3...@width*0.75-20),0))
     elsif @r.rand(0...1000) == 0
-      @bonus.push(Degat.new(@r.rand(@width/3...@width*0.75),0))
+      @bonus.push(Degat.new(@r.rand(@width/3...@width*0.75-20),0))
     end
 
     # Suppression des projectiles en dehors de la map

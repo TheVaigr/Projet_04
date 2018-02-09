@@ -11,7 +11,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Projet_04@bomber.coverage" NAME="bomber Coverage Results" MODIFIED="1517940812241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes/Ennemis" MODULE_NAME="Projet_04" />
-    <SUITE FILE_PATH="coverage/Projet_04@main.coverage" NAME="main Coverage Results" MODIFIED="1518172604568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
+    <SUITE FILE_PATH="coverage/Projet_04@main.coverage" NAME="main Coverage Results" MODIFIED="1518174680077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
     <SUITE FILE_PATH="coverage/Projet_04@projectile.coverage" NAME="projectile Coverage Results" MODIFIED="1517959540903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
     <SUITE FILE_PATH="coverage/Projet_04@information.coverage" NAME="information Coverage Results" MODIFIED="1517835030649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Classes" MODULE_NAME="Projet_04" />
     <SUITE FILE_PATH="coverage/Projet_04@main_ihm.coverage" NAME="main_ihm Coverage Results" MODIFIED="1518026976714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/IHM" MODULE_NAME="Projet_04" />
@@ -23,31 +23,20 @@
       <file leaf-file-name="mvc.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classes/mvc.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="187" column="31" lean-forward="false" selection-start-line="187" selection-start-column="31" selection-end-line="187" selection-end-column="31" />
+            <state relative-caret-position="330">
+              <caret line="752" column="60" lean-forward="false" selection-start-line="752" selection-start-column="60" selection-end-line="752" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemie_2_fighter_N.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ressources/enemie_2_fighter_N.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemie_2_heavyfighter_N.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ressources/enemie_2_heavyfighter_N.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemie_4_fighter_N.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ressources/enemie_4_fighter_N.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
+      <file leaf-file-name="z_order.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/z_order.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -112,7 +101,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>estMort</find>
       <find>:jeu</find>
       <find>draw</find>
       <find>300</find>
@@ -126,7 +114,6 @@
       <find>drawJeu</find>
       <find>drawa</find>
       <find>@carre</find>
-      <find>@color</find>
       <find>color</find>
       <find>color2</find>
       <find>généra</find>
@@ -138,10 +125,12 @@
       <find>générat</find>
       <find>@nimp</find>
       <find>%</find>
-      <find>drawjeu</find>
       <find>updatejeu</find>
       <find>@progression</find>
       <find>game</find>
+      <find>@color</find>
+      <find>400</find>
+      <find>drawjeu</find>
     </findStrings>
     <replaceStrings>
       <replace>nil</replace>
@@ -187,8 +176,8 @@
         <option value="$PROJECT_DIR$/Classes/hero.rb" />
         <option value="$PROJECT_DIR$/Classes/Bonus/degat.rb" />
         <option value="$PROJECT_DIR$/Classes/Bonus/heal.rb" />
-        <option value="$PROJECT_DIR$/Classes/z_order.rb" />
         <option value="$PROJECT_DIR$/Classes/main.rb" />
+        <option value="$PROJECT_DIR$/Classes/z_order.rb" />
         <option value="$PROJECT_DIR$/Classes/mvc.rb" />
       </list>
     </option>
@@ -419,12 +408,12 @@
       <workItem from="1518002115816" duration="39746000" />
       <workItem from="1518044236316" duration="17456000" />
       <workItem from="1518087102947" duration="33731000" />
-      <workItem from="1518166760586" duration="5785000" />
+      <workItem from="1518166760586" duration="7505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180513000" />
+    <option name="totallyTimeSpent" value="182233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -498,11 +487,6 @@
     <entry file="file://$PROJECT_DIR$/Ressources/side_R.png" />
     <entry file="file://$PROJECT_DIR$/Ressources/side_L.png" />
     <entry file="file://$PROJECT_DIR$/Ressources/ecrant_acceuil.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ressources/background.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -689,25 +673,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/z_order.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/Armes/missile.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="6" column="61" lean-forward="false" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ressources/Background_menu.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Ressources/enemie_2_fighter_N.png">
@@ -730,10 +701,28 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/z_order.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ressources/background.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ressources/Background_menu.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/mvc.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="187" column="31" lean-forward="false" selection-start-line="187" selection-start-column="31" selection-end-line="187" selection-end-column="31" />
+        <state relative-caret-position="330">
+          <caret line="752" column="60" lean-forward="false" selection-start-line="752" selection-start-column="60" selection-end-line="752" selection-end-column="60" />
           <folding />
         </state>
       </provider>

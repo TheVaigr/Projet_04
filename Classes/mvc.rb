@@ -14,7 +14,7 @@ require_relative '../Classes/Bonus/degat'
 
 class MVC < Gosu::Window
 
-  attr_accessor :background_image, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame, :bonus ,:couleur, :DEBUT_JEU, :FIN_JEU
+  attr_accessor :background_image_jeu, :model, :vitesseAutoScroll, :ennemis, :projectilesAllies, :projectilesEnnemis, :song, :difficulte, :width, :height, :frame, :bonus ,:couleur, :DEBUT_JEU, :FIN_JEU
   def initialize(width, height, model)
     super #width, height
     @DEBUT_JEU = 100
@@ -26,7 +26,20 @@ class MVC < Gosu::Window
     @vaisseau1 = Gosu::Image.new("../ressources/ship_1_N.png")
     @vaisseau2 = Gosu::Image.new("../ressources/ship_2_N.png")
     @vaisseau3 = Gosu::Image.new("../ressources/ship_3_N.png")
-    @background_image = Gosu::Image.new("../Ressources/background.png")
+    @background_image_jeu = Gosu::Image.new("../Ressources/background.png")
+    @background = Gosu::Image.new("../Ressources/ecrant_acceuil.png")
+    @vaisseau_ennemi_1 = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
+    @vaisseau_ennemi_2 = Gosu::Image.new("../ressources/enemie_2_heavyfighter_N.png")
+    @vaisseau_ennemi_3 = Gosu::Image.new("../ressources/enemie_3_blocker_N.png")
+    @vaisseau_ennemi_4 = Gosu::Image.new("../ressources/enemie_4_fighter_N.png")
+    @vaisseau_ennemi_5 = Gosu::Image.new("../ressources/enemie_5_mamout_N.png")
+    @vaisseau_allie = Gosu::Image.new("../ressources/ship_1_N.png")
+    @bonus_heal = Gosu::Image.new("../ressources/popup_life.png")
+    @bonus_shield = Gosu::Image.new("../ressources/ship_3_N.png")
+    @arme1 = Gosu::Image.new("../ressources/tire_vert.png")
+    @arme2 = Gosu::Image.new("../ressources/missil_2.png")
+    @arme3 = Gosu::Image.new("../ressources/missil_4.png")
+    @image = "rien"
 
     @color = Gosu::Color.new(100, 255, 255, 255)
     @color2 = Gosu::Color.new(100, 128, 0, 0)
@@ -36,6 +49,7 @@ class MVC < Gosu::Window
     @font4 = Gosu::Font.new(50)
     @font5 = Gosu::Font.new(35)
     @font6 = Gosu::Font.new(25)
+    @font7 = Gosu::Font.new(30)
 
     @pos_1 = (width-@font1.text_width("Milky Way Light"))/2 # Titre1
     @pos_6 = (width-@font1.text_width("Menu"))/2 # Titre2
@@ -77,6 +91,38 @@ class MVC < Gosu::Window
     @background1 = 0
     @background2 = -1080
     @bonus = []
+
+
+
+
+
+
+
+
+    @pos_6 = (width-@font1.text_width("Détails du jeu")) / 2 # Titre
+    @pos_retour = (width-@font1.text_width("Retour")) / 2
+    @curseur = "rien"
+    @clic = false
+    @color = Gosu::Color.new(100, 255, 255, 255)
+    @pos_x = mouse_x # Position verticale de la sourie
+    @pos_y = mouse_y # Position horizontal de la sourie
+    @rotation = 0
+    @x1 = 0
+    @x2 = 0
+    @y1 = 0
+    @y2 = 0
+    @col1 = Gosu::Color.new(0xff_0fffff)
+    @col2 = Gosu::Color.new(0xff_f0ffff)
+    @col3 = Gosu::Color.new(0xff_ff0fff)
+    @col4 = Gosu::Color.new(0xff_fff0ff)
+    #@test1 = 0
+    #@test2 = 0
+    #@test3 = 0
+    #@test4= 0
+
+
+
+
 
     @context = :acceuil
   end
@@ -136,7 +182,7 @@ class MVC < Gosu::Window
 
   def drawAcceuil
     self.caption = "Acceuil"
-    #@background_image.draw(0, 0, 0)
+    @background_image_jeu.draw(0, 0, -2)
     # Dessin des boutton
     @font1.draw("Milky Way Light", @pos_1, 50, 1)
     @font2.draw("Jouer", @pos_2, 250, 1)
@@ -161,7 +207,7 @@ class MVC < Gosu::Window
 
   def drawMenu
     self.caption = "Menu"
-    #@background_image.draw(0, 0, 0)
+    #@background_image_jeu.draw(0, 0, 0)
     @font1.draw("Menu", @pos_6, 30, 1)
     # Dessin des bouttons de changement de vaisseau
     @vaisseau1.draw(200, 150, 1, 2, 2, 0xff_ffffff, :default)
@@ -216,8 +262,8 @@ class MVC < Gosu::Window
 
   def drawJeu
     self.caption = "Milky Way Light"
-    @background_image.draw(480,@background1,-1)
-    @background_image.draw(480,@background2,-1)
+    @background_image_jeu.draw(480,@background1,-1)
+    @background_image_jeu.draw(480,@background2,-1)
     for i in 0..@bonus.size-1
       if @bonus[i] != nil
         @bonus[i].draw

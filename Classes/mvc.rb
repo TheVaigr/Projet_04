@@ -35,7 +35,7 @@ class MVC < Gosu::Window
     @vaisseau_ennemi_5 = Gosu::Image.new("../ressources/enemie_5_mamout_N.png")
     @vaisseau_allie = Gosu::Image.new("../ressources/ship_1_N.png")
     @bonus_heal = Gosu::Image.new("../ressources/popup_life.png")
-    @bonus_shield = Gosu::Image.new("../ressources/ship_3_N.png")
+    @bonus_dammage = Gosu::Image.new("../ressources/stats_power.png")
     @arme1 = Gosu::Image.new("../ressources/tire_vert.png")
     @arme2 = Gosu::Image.new("../ressources/missil_2.png")
     @arme3 = Gosu::Image.new("../ressources/missil_4.png")
@@ -62,7 +62,7 @@ class MVC < Gosu::Window
     @pos_5 = (width-@font2.text_width("Quitter"))/2 # Bouton pour quitter
     @pos_6 = (width-@font1.text_width("Menu"))/2 # Titre2
     @pos_7 = (width-@font1.text_width("Classement")) / 2 # Titre
-    @pos_8 = (width-@font1.text_width("Détails du jeu")) / 2 # Titre
+    @pos_8 = (width-@font1.text_width("Régles")) / 2 # Titre
     @pos_retour = (width-@font1.text_width("Retour")) / 2 # Bouton acceuil
 
     @pos_x = mouse_x # Position verticale de la sourie
@@ -372,7 +372,7 @@ class MVC < Gosu::Window
   #################################################
 
   def drawRegles
-    @font1.draw("Détails du jeu", @pos_8, 30, 1)
+    @font1.draw("Règles", @pos_8, 30, 1)
 
     @vaisseau_ennemi_1.draw(95, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
     @vaisseau_ennemi_2.draw(285, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
@@ -380,11 +380,11 @@ class MVC < Gosu::Window
     @vaisseau_ennemi_4.draw(285, 550, 1, 1.5, 1.5, 0xff_ffffff, :default)
     @vaisseau_ennemi_5.draw(-75, 620, 0, 1.5, 1.5, 0xff_ffffff, :default)
     @vaisseau_allie.draw(1455, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
-    @bonus_heal.draw(1668, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
-    @bonus_shield.draw(1455, 550, 1, 1.5, 1.5, 0xff_ffffff, :default)
-    @arme1.draw(1618, 600, 1, 1.5, 1.5, 0xff_ffffff, :default)
-    @arme2.draw(1455, 700, 1, 1.5, 1.5, 0xff_ffffff, :default)
-    @arme3.draw(1618, 750, 1, 1.5, 1.5, 0xff_ffffff, :default)
+    @bonus_dammage.draw(1710, 450, 1, 1.5, 1.5, 0xff_ffffff, :default)
+    @bonus_heal.draw(1510, 605, 1, 1.5, 1.5, 0xff_ffffff, :default)
+    @arme1.draw(1725, 615, 1, 1.5, 1.5, 0xff_ffffff, :default)
+    @arme2.draw(1515, 760, 1, 1.5, 1.5, 0xff_ffffff, :default)
+    @arme3.draw(1713, 750, 1, 1.5, 1.5, 0xff_ffffff, :default)
 
     # Dessin des bouttons de changement d'objet
     if @curseur == "vaisseau 1"
@@ -483,9 +483,9 @@ class MVC < Gosu::Window
       elsif @image == @vaisseau
         @font7.draw("Votre vaisseau",(width-@font7.text_width("Votre vaisseau"))/ 2, 600, 1)
         @font7.draw("PV : 100" ,(width-@font7.text_width("PV : 100"))/ 2, 650, 1)
-      elsif @image == @bonus_shield
-        @font7.draw("Bouclier",(width-@font7.text_width("Bouclier"))/ 2, 600, 1)
-        @font7.draw("Pas encore implémenter",(width-@font7.text_width("Pas encore implémenter"))/ 2, 650, 1)
+      elsif @image == @bonus_dammage
+        @font7.draw("Bonus de dégats",(width-@font7.text_width("Bonus de dégats"))/ 2, 600, 1)
+        @font7.draw("Pendant 5 secondes, tous vos projectiles one shot",(width-@font7.text_width("Pendant 5 secondes, tous vos projectiles one shot"))/ 2, 650, 1)
       elsif @image == @bonus_heal
         @font7.draw("Un paquet de soin qui vous rend de la vie",(width-@font7.text_width("Un paquet de soin qui vous rend de la vie"))/ 2, 600, 1)
         @font7.draw("Soin : 100",(width-@font7.text_width("Soin : 100"))/ 2, 650, 1)
@@ -503,8 +503,8 @@ class MVC < Gosu::Window
 
     # Texte
     @font2.draw("Acceuil",(width-@font2.text_width("Retour"))/ 2, 950, 1)
-    @font7.draw("Dans ce jeu, vous affronterez l'infini de l'espace,toute fois celui-ci est remplis d'ennemis de", (width-@font7.text_width("Dans ce jeu, vous affronterez l'infini de l'espace,toute fois celui-ci est remplis d'ennemis de"))/ 2, 150, 1)
-    @font7.draw("toutes sortes, vous devrez soient les détruir a l'aide de vos differentes armes soient les éviter", (width-@font7.text_width("toutes sortes, vous devrez soient les détruir a l'aide de vos differentes armes soient les éviter"))/ 2, 200, 1)
+    @font7.draw("Dans ce jeu, vous affronterez l'infini de l'espace,toutfois celui-ci est remplis d'ennemis de", (width-@font7.text_width("Dans ce jeu, vous affronterez l'infini de l'espace,toutfois celui-ci est remplis d'ennemis de"))/ 2, 150, 1)
+    @font7.draw("toutes sortes, vous devrez soit les détruir a l'aide de vos differentes armes soient les éviter", (width-@font7.text_width("toutes sortes, vous devrez soit les détruir a l'aide de vos differentes armes soient les éviter"))/ 2, 200, 1)
     @font7.draw("car toutes collision endomageraient votre vaisseau, et si votre vaisseau devient trop endomager, vous", (width-@font7.text_width("car toutes collision endomageraient votre vaisseau, et si votre vaisseau devient trop endomager, vous"))/ 2, 250, 1)
     @font7.draw("sucomberer. Des bonus apparaiteront pour vous aider dans votre périple.", (width-@font7.text_width("sucomberer. Des bonus apparaiteront pour vous aider dans votre périple."))/ 2, 300, 1)
 
@@ -1023,7 +1023,7 @@ class MVC < Gosu::Window
         @y2 = 550
       elsif @pos_x < 1805 && @pos_x > 1655 && @pos_y < 550 && @pos_y > 400
         @clic = true
-        @image = @bonus_shield
+        @image = @bonus_dammage
         @x1 = 1655
         @x2 = 1805
         @y1 = 400

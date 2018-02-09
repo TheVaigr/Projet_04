@@ -539,7 +539,7 @@ class MVC < Gosu::Window
 
     # Génération des ennemis aléatoire
     if @difficulte == 4
-      if (30/1+20 - @progression/20) < 10
+      if (30/1+20 - @progression/2) < 10
         if @frame > @DEBUT_JEU && @frame % 10 == 0.0
           r = @r.rand(0...3)
           if r == 0
@@ -551,7 +551,7 @@ class MVC < Gosu::Window
           end
         end
       else
-        if @frame > @DEBUT_JEU && (@frame % (30/1+20 - @progression/20) == 0.0)
+        if @frame > @DEBUT_JEU && (@frame % (30/1+20 - @progression/2) == 0.0)
           r = @r.rand(0...3)
           if r == 0
             @ennemis.push(Artilleur.new(@r.rand(@width*0.25...@width*0.75-100),0))

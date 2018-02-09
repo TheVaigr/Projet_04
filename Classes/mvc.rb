@@ -47,13 +47,14 @@ class MVC < Gosu::Window
     @color2 = Gosu::Color.new(0xff_f0ffff)
     @color3 = Gosu::Color.new(0xff_ff0fff)
     @color4 = Gosu::Color.new(0xff_fff0ff)
-    @font1 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",100)
-    @font2 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",60)
-    @font3 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",40)
+    @font1 = Gosu::Font.new(100, name: "../ressources/font/hemi.ttf")
+    @font2 = Gosu::Font.new(60,name: "../ressources/font/hemi.ttf")
+    @font3 = Gosu::Font.new(40, name: "../ressources/font/hemi.ttf")
     @font4 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",50)
     @font5 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",35)
     @font6 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",25)
     @font7 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",30)
+   # Gosu::Font.new(80, name: "assets/fonts/VT323/VT323-Regular.ttf")
 
     @pos_1 = (width-@font1.text_width("Milky Way Light"))/2 # Titre1
     @pos_2 = (width-@font2.text_width("Jouer"))/2 # Bouton pour jouer
@@ -173,15 +174,20 @@ class MVC < Gosu::Window
     @font2.draw("Classement", @pos_3, 450, 1)
     @font2.draw("Règles", @pos_4, 650, 1)
     @font2.draw("Quitter", @pos_5, 850, 1)
+    #@carre = Gosu::draw_rect(850, 230, 220, 100, @color)
 
     if @curseur == "jouer"
-      @carre = Gosu::draw_rect(850, 230, 220, 100, @color)
+      @vaisseau2.draw(650, 200, 1, 1.5, 1.5, 0xff_ffffff, :default)
+      @vaisseau2.draw(1130, 200, 1, 1.5, 1.5, 0xff_ffffff, :default)
     elsif @curseur == "classement"
-      @carre = Gosu::draw_rect(780, 430, 360, 100, @color)
+      @vaisseau_ennemi_1.draw(580, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
+      @vaisseau_ennemi_1.draw(1190, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
     elsif @curseur == "regles"
-      @carre = Gosu::draw_rect(840, 630, 240, 100, @color)
+      @vaisseau_ennemi_2.draw(640, 600, 1, 1.5, 1.5, 0xff_ffffff, :default)
+      @vaisseau_ennemi_2.draw(1130, 600, 1, 1.5, 1.5, 0xff_ffffff, :default)
     elsif @curseur == "quitter"
-      @carre = Gosu::draw_rect(840, 830, 240, 100, @color)
+      @vaisseau_ennemi_4.draw(640, 800, 1, 1.5, 1.5, 0xff_ffffff, :default)
+      @vaisseau_ennemi_4.draw(1130, 800, 1, 1.5, 1.5, 0xff_ffffff, :default)
     end
   end
 

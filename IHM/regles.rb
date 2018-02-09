@@ -20,7 +20,7 @@ class Regles < Gosu::Window
     @font2 = Gosu::Font.new(60)
     @font3 = Gosu::Font.new(40)
     @font7 = Gosu::Font.new(30)
-    @pos_6 = (width-@font1.text_width("Détails du jeu")) / 2 # Titre
+    @pos_8 = (width-@font1.text_width("Détails du jeu")) / 2 # Titre
     @pos_retour = (width-@font1.text_width("Retour")) / 2
     @curseur = "rien"
     @clic = false
@@ -32,14 +32,14 @@ class Regles < Gosu::Window
     @x2 = 0
     @y1 = 0
     @y2 = 0
-    @col1 = Gosu::Color.new(0xff_0fffff)
-    @col2 = Gosu::Color.new(0xff_f0ffff)
-    @col3 = Gosu::Color.new(0xff_ff0fff)
-    @col4 = Gosu::Color.new(0xff_fff0ff)
-    @test1 = 0
-    @test2 = 0
-    @test3 = 0
-    @test4= 0
+    @color1 = Gosu::Color.new(0xff_0fffff)
+    @color2 = Gosu::Color.new(0xff_f0ffff)
+    @color3 = Gosu::Color.new(0xff_ff0fff)
+    @color4 = Gosu::Color.new(0xff_fff0ff)
+    @color_trait_1 = 0
+    @color_trait_2 = 0
+    @color_trait_3 = 0
+    @color_trait_4= 0
   end
 
   def update
@@ -47,25 +47,25 @@ class Regles < Gosu::Window
     @pos_y = mouse_y
     @rotation += 1
     if @rotation%20 == 0
-      @test1 = @col1
-      @test2 = @col2
-      @test3 = @col3
-      @test4 = @col4
+      @color_trait_1 = @color1
+      @color_trait_2 = @color2
+      @color_trait_3 = @color3
+      @color_trait_4 = @color4
     elsif @rotation%20 == 5
-      @test1 = @col4
-      @test2 = @col1
-      @test3 = @col2
-      @test4 = @col3
+      @color_trait_1 = @color4
+      @color_trait_2 = @color1
+      @color_trait_3 = @color2
+      @color_trait_4 = @color3
     elsif @rotation%20 == 10
-      @test1 = @col3
-      @test2 = @col4
-      @test3 = @col1
-      @test4 = @col2
+      @color_trait_1 = @color3
+      @color_trait_2 = @color4
+      @color_trait_3 = @color1
+      @color_trait_4 = @color2
     elsif @rotation%20 == 15
-      @test1 = @col2
-      @test2 = @col3
-      @test3 = @col4
-      @test4 = @col1
+      @color_trait_1 = @color2
+      @color_trait_2 = @color3
+      @color_trait_3 = @color4
+      @color_trait_4 = @color1
     end
     if @pos_x < 245 && @pos_x > 95 && @pos_y < 550 && @pos_y > 400
       @curseur = "vaisseau 1"
@@ -97,7 +97,7 @@ class Regles < Gosu::Window
   end
 
   def draw
-    @font1.draw("Détails du jeu", @pos_6, 30, 1)
+    @font1.draw("Détails du jeu", @pos_8, 30, 1)
 
     @vaisseau_ennemi_1.draw(95, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
     @vaisseau_ennemi_2.draw(285, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
@@ -170,10 +170,10 @@ class Regles < Gosu::Window
     end
 
     if @clic == true
-      @ligne = Gosu::draw_line(@x1, @y1, @test1, @x2, @y1, @test2)
-      @ligne = Gosu::draw_line(@x2, @y1, @test2, @x2, @y2, @test3)
-      @ligne = Gosu::draw_line(@x2, @y2, @test3, @x1, @y2, @test4)
-      @ligne = Gosu::draw_line(@x1, @y2, @test4, @x1, @y1, @test1)
+      @ligne = Gosu::draw_line(@x1, @y1, @color_trait_1, @x2, @y1, @color_trait_2)
+      @ligne = Gosu::draw_line(@x2, @y1, @color_trait_2, @x2, @y2, @color_trait_3)
+      @ligne = Gosu::draw_line(@x2, @y2, @color_trait_3, @x1, @y2, @color_trait_4)
+      @ligne = Gosu::draw_line(@x1, @y2, @color_trait_4, @x1, @y1, @color_trait_1)
     end
 
       # Donnée de l'objet selectionner
@@ -233,10 +233,10 @@ class Regles < Gosu::Window
     @font7.draw("car toutes collision endomageraient votre vaisseau, et si votre vaisseau devient trop endomager, vous", (width-@font7.text_width("car toutes collision endomageraient votre vaisseau, et si votre vaisseau devient trop endomager, vous"))/ 2, 250, 1)
     @font7.draw("sucomberer. Des bonus apparaiteront pour vous aider dans votre périple.", (width-@font7.text_width("sucomberer. Des bonus apparaiteront pour vous aider dans votre périple."))/ 2, 300, 1)
 
-    @ligne = Gosu::draw_line(560, 400, @test1, 1360, 400, @test2)
-    @ligne = Gosu::draw_line(1360, 400, @test2, 1360, 900, @test3)
-    @ligne = Gosu::draw_line(1360, 900, @test3, 560, 900, @test4)
-    @ligne = Gosu::draw_line(560, 900, @test4, 560, 400, @test1)
+    @ligne = Gosu::draw_line(560, 400, @color_trait_1, 1360, 400, @color_trait_2)
+    @ligne = Gosu::draw_line(1360, 400, @color_trait_2, 1360, 900, @color_trait_3)
+    @ligne = Gosu::draw_line(1360, 900, @color_trait_3, 560, 900, @color_trait_4)
+    @ligne = Gosu::draw_line(560, 900, @color_trait_4, 560, 400, @color_trait_1)
 
     if @curseur == "acceuil"
       @carre = Gosu::draw_rect(840, 930, 255, 100, @color)

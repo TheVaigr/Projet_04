@@ -27,7 +27,7 @@ class MVC < Gosu::Window
     @vaisseau2 = Gosu::Image.new("../ressources/ship_2_N.png")
     @vaisseau3 = Gosu::Image.new("../ressources/ship_3_N.png")
     @background_image_jeu = Gosu::Image.new("../Ressources/background.png")
-    @background = Gosu::Image.new("../Ressources/ecrant_acceuil.png")
+    @background = Gosu::Image.new("../Ressources/Background_menu.jpg")
     @vaisseau_ennemi_1 = Gosu::Image.new("../ressources/enemie_2_fighter_N.png")
     @vaisseau_ennemi_2 = Gosu::Image.new("../ressources/enemie_2_heavyfighter_N.png")
     @vaisseau_ennemi_3 = Gosu::Image.new("../ressources/enemie_3_blocker_N.png")
@@ -47,13 +47,13 @@ class MVC < Gosu::Window
     @color2 = Gosu::Color.new(0xff_f0ffff)
     @color3 = Gosu::Color.new(0xff_ff0fff)
     @color4 = Gosu::Color.new(0xff_fff0ff)
-    @font1 = Gosu::Font.new(100)
-    @font2 = Gosu::Font.new(60)
-    @font3 = Gosu::Font.new(40)
-    @font4 = Gosu::Font.new(50)
-    @font5 = Gosu::Font.new(35)
-    @font6 = Gosu::Font.new(25)
-    @font7 = Gosu::Font.new(30)
+    @font1 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",100)
+    @font2 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",60)
+    @font3 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",40)
+    @font4 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",50)
+    @font5 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",35)
+    @font6 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",25)
+    @font7 = Gosu::Font.new(self,"../ressources/font/hemi.ttf",30)
 
     @pos_1 = (width-@font1.text_width("Milky Way Light"))/2 # Titre1
     @pos_2 = (width-@font2.text_width("Jouer"))/2 # Bouton pour jouer
@@ -166,7 +166,7 @@ class MVC < Gosu::Window
 
   def drawAcceuil
     self.caption = "Acceuil"
-    #@background.draw(0, 0, -2)
+    @background.draw(0, 0, ZOrder::Background)
     # Dessin des boutton
     @font1.draw("Milky Way Light", @pos_1, 50, 1)
     @font2.draw("Jouer", @pos_2, 250, 1)
@@ -189,7 +189,7 @@ class MVC < Gosu::Window
 
   def drawMenu
     self.caption = "Menu"
-    #@background_image_jeu.draw(0, 0, 0)
+    @background.draw(0, 0, ZOrder::Background)
     @font1.draw("Menu", @pos_6, 30, 1)
     # Dessin des bouttons de changement de vaisseau
     @vaisseau1.draw(200, 150, 1, 2, 2, 0xff_ffffff, :default)
@@ -244,6 +244,8 @@ class MVC < Gosu::Window
 
   def drawJeu
     self.caption = "Milky Way Light"
+    @background.draw(@width/4-1920, 0, ZOrder::Background)
+    @background.draw(@width*(3/4.0), 0, ZOrder::Background)
     @background_image_jeu.draw(480,@background1,-1)
     @background_image_jeu.draw(480,@background2,-1)
     for i in 0..@bonus.size-1
@@ -309,6 +311,7 @@ class MVC < Gosu::Window
 
   def drawClassement
     self.caption = "Classement"
+    @background.draw(0, 0, ZOrder::Background)
     @ligne = Gosu::draw_line(480, 310, Gosu::Color.new(0xff_ffffff), 480, 900, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(960, 310, Gosu::Color.new(0xff_ffffff), 960, 900, Gosu::Color.new(0xff_ffffff))
     @ligne = Gosu::draw_line(1440, 310, Gosu::Color.new(0xff_ffffff), 1440, 900, Gosu::Color.new(0xff_ffffff))
@@ -373,7 +376,7 @@ class MVC < Gosu::Window
 
   def drawRegles
     @font1.draw("Règles", @pos_8, 30, 1)
-
+    @background.draw(0, 0, ZOrder::Background)
     @vaisseau_ennemi_1.draw(95, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
     @vaisseau_ennemi_2.draw(285, 400, 1, 1.5, 1.5, 0xff_ffffff, :default)
     @vaisseau_ennemi_3.draw(95, 550, 1, 1.5, 1.5, 0xff_ffffff, :default)
@@ -454,7 +457,7 @@ class MVC < Gosu::Window
     # Donnée de l'objet selectionner
     if @image == @vaisseau_ennemi_5
       @image.draw(width/2-350, 320, 1, 1.5, 1.5, 0xff_ffffff, :default)
-      @font7.draw("Le gardin se deplace normalement et vous bloquer le passage",(width-@font7.text_width("Le gardin se deplace normalement et vous bloquer le passage"))/ 2, 600, 1)
+      @font7.draw("Le gardin se deplace normalement et vous bloque le passage",(width-@font7.text_width("Le gardin se deplace normalement et vous bloque le passage"))/ 2, 600, 1)
       @font7.draw("PV : 800" ,(width-@font7.text_width("PV : 100"))/ 2, 650, 1)
       @font7.draw("Vitesse : normal" ,(width-@font7.text_width("Vitesse : normal"))/ 2, 700, 1)
       @font7.draw("Dégats de collision : 40" ,(width-@font7.text_width("Dégats de collision : 40"))/ 2, 750, 1)
@@ -469,10 +472,10 @@ class MVC < Gosu::Window
         @font7.draw("Dégats de collision : 20" ,(width-@font7.text_width("Dégats de collision : 50"))/ 2, 750, 1)
         @font7.draw("Dégats de tir : 20" ,(width-@font7.text_width("Dégats de tir : 30"))/ 2, 800, 1)
       elsif @image == @vaisseau_ennemi_2
-        @font7.draw("Pas encore implémenter",(width-@font7.text_width("Pas encore implémenter"))/ 2, 600, 1)
+        @font7.draw("Pas encore implémenté",(width-@font7.text_width("Pas encore implémenté"))/ 2, 600, 1)
         @font7.draw("Only DLC",(width-@font7.text_width("Only DLC"))/ 2, 650, 1)
       elsif @image == @vaisseau_ennemi_3
-        @font7.draw("Pas encore implémenter",(width-@font7.text_width("Pas encore implémenter"))/ 2, 600, 1)
+        @font7.draw("Pas encore implémenté",(width-@font7.text_width("Pas encore implémenté"))/ 2, 600, 1)
         @font7.draw("Only DLC",(width-@font7.text_width("Only DLC"))/ 2, 650, 1)
       elsif @image == @vaisseau_ennemi_4
         @font7.draw("Le bomber se deplace vite et agit comme un kamikaze",(width-@font7.text_width("Le bomber se deplace vite et agit comme un kamikaze"))/ 2, 600, 1)
@@ -480,21 +483,21 @@ class MVC < Gosu::Window
         @font7.draw("Vitesse : rapide" ,(width-@font7.text_width("Vitesse : rapide"))/ 2, 700, 1)
         @font7.draw("Dégats de collision : 30" ,(width-@font7.text_width("Dégats de collision : 30"))/ 2, 750, 1)
         @font7.draw("Dégats de tir : 0" ,(width-@font7.text_width("Dégats de tir : 0"))/ 2, 800, 1)
-      elsif @image == @vaisseau
+      elsif @image == @vaisseau_allie
         @font7.draw("Votre vaisseau",(width-@font7.text_width("Votre vaisseau"))/ 2, 600, 1)
         @font7.draw("PV : 100" ,(width-@font7.text_width("PV : 100"))/ 2, 650, 1)
       elsif @image == @bonus_dammage
         @font7.draw("Bonus de dégats",(width-@font7.text_width("Bonus de dégats"))/ 2, 600, 1)
-        @font7.draw("Pendant 5 secondes, tous vos projectiles one shot",(width-@font7.text_width("Pendant 5 secondes, tous vos projectiles one shot"))/ 2, 650, 1)
+        @font7.draw("Pendant 5 secondes, tout vos projectiles one shot",(width-@font7.text_width("Pendant 5 secondes, tout vos projectiles one shot"))/ 2, 650, 1)
       elsif @image == @bonus_heal
         @font7.draw("Un paquet de soin qui vous rend de la vie",(width-@font7.text_width("Un paquet de soin qui vous rend de la vie"))/ 2, 600, 1)
         @font7.draw("Soin : 100",(width-@font7.text_width("Soin : 100"))/ 2, 650, 1)
       elsif @image == @arme1
-        @font7.draw("Un tir de blaster avec une fréquence élever",(width-@font7.text_width("Un tir de blaster avec une fréquence élever"))/ 2, 600, 1)
+        @font7.draw("Un tir de blaster avec une fréquence élevée",(width-@font7.text_width("Un tir de blaster avec une fréquence élevée"))/ 2, 600, 1)
         @font7.draw("mais de faible dégats",(width-@font7.text_width("mais de faible dégtas"))/ 2, 650, 1)
       elsif @image == @arme2
-        @font7.draw("Une roquette avec une fréquence de tir moyen",(width-@font7.text_width("Une roquette avec une fréquence de tir moyen"))/ 2, 600, 1)
-        @font7.draw("avec des dégats moyen",(width-@font7.text_width("avec des dégats moyen"))/ 2, 650, 1)
+        @font7.draw("Une roquette avec une fréquence de tir moyens",(width-@font7.text_width("Une roquette avec une fréquence de tir moyens"))/ 2, 600, 1)
+        @font7.draw("avec des dégats moyens",(width-@font7.text_width("avec des dégats moyens"))/ 2, 650, 1)
       elsif @image == @arme3
         @font7.draw("Un missile avec une basse fréquence de tir qui se",(width-@font7.text_width("Un missile avec une basse fréquence de tir qui se"))/ 2, 600, 1)
         @font7.draw("déplace doucement, mais annihile tous ce qu'il touche",(width-@font7.text_width("déplace doucement, mais annihile tous ce qu'il touche"))/ 2, 650, 1)
@@ -503,10 +506,10 @@ class MVC < Gosu::Window
 
     # Texte
     @font2.draw("Acceuil",(width-@font2.text_width("Retour"))/ 2, 950, 1)
-    @font7.draw("Dans ce jeu, vous affronterez l'infini de l'espace,toutfois celui-ci est remplis d'ennemis de", (width-@font7.text_width("Dans ce jeu, vous affronterez l'infini de l'espace,toutfois celui-ci est remplis d'ennemis de"))/ 2, 150, 1)
-    @font7.draw("toutes sortes, vous devrez soit les détruir a l'aide de vos differentes armes soient les éviter", (width-@font7.text_width("toutes sortes, vous devrez soit les détruir a l'aide de vos differentes armes soient les éviter"))/ 2, 200, 1)
-    @font7.draw("car toutes collision endomageraient votre vaisseau, et si votre vaisseau devient trop endomager, vous", (width-@font7.text_width("car toutes collision endomageraient votre vaisseau, et si votre vaisseau devient trop endomager, vous"))/ 2, 250, 1)
-    @font7.draw("sucomberer. Des bonus apparaiteront pour vous aider dans votre périple.", (width-@font7.text_width("sucomberer. Des bonus apparaiteront pour vous aider dans votre périple."))/ 2, 300, 1)
+    @font7.draw("Dans ce jeu, vous affronterez l'infini de l'espace,toutefois celui-ci est rempli d'ennemis de", (width-@font7.text_width("Dans ce jeu, vous affronterez l'infini de l'espace,toutefois celui-ci est rempli d'ennemis de"))/ 2, 150, 1)
+    @font7.draw("toutes sortes, vous devrez soit les détruire a l'aide de vos differentes armes soit les éviter", (width-@font7.text_width("toutes sortes, vous devrez soit les détruire a l'aide de vos differentes armes soit les éviter"))/ 2, 200, 1)
+    @font7.draw("car toutes collisions endommageraient votre vaisseau, et s'il devient trop endommager, vous", (width-@font7.text_width("car toutes collisions endommageraient votre vaisseau, et s'il devient trop endommager, vous"))/ 2, 250, 1)
+    @font7.draw("succomberez. Des bonus apparaiteront pour vous aidez dans votre périple.", (width-@font7.text_width("succomberez. Des bonus apparaiteront pour vous aidez dans votre périple."))/ 2, 300, 1)
 
     @ligne = Gosu::draw_line(560, 400, @color_trait_1, 1360, 400, @color_trait_2)
     @ligne = Gosu::draw_line(1360, 400, @color_trait_2, 1360, 900, @color_trait_3)
